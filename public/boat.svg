@@ -1,0 +1,24 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  width="128"
+  height="128"
+  fill="none"
+>
+  <!-- Boat base -->
+  <path
+    d="M8 40c4 8 16 8 24 8s20 0 24-8H8z"
+    fill="#000"
+  />
+  <!-- Mast -->
+  <rect x="30" y="12" width="4" height="28" fill="#000" />
+  <!-- Sail -->
+  <path
+    d="M32 14l-14 18h14V14z"
+    fill="#000"
+  />
+  <path
+    d="M32 14l14 18H32V14z"
+    fill="#fff"
+  />
+</svg>
