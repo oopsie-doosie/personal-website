@@ -1,5 +1,6 @@
 /* src/styles/themes.css */
 
+/* Default theme (Tech-Forward) in dark mode */
 :root {
   /* Default theme (Tech-Forward Dark) */
   --primary-background: #0f172a; /* slate-900 */
@@ -15,32 +16,69 @@
   --gradient-end: #8b5cf6; /* purple-600 */
 }
 
+/* Light mode versions of themes */
+[data-color-mode="light"] {
+  --primary-background: #f8fafc; /* slate-50 */
+  --secondary-background: #f1f5f9; /* slate-100 */
+  --text-primary: #0f172a; /* slate-900 */
+  --text-secondary: #334155; /* slate-700 */
+  --text-tertiary: #64748b; /* slate-500 */
+  --border-color: #cbd5e1; /* slate-300 */
+  --card-background: rgba(255, 255, 255, 0.8); /* white with opacity */
+}
+
+/* Tech-Forward theme colors that persist in both light and dark mode */
+:root,
+[data-theme="tech-forward"] {
+  --primary-accent: #3b82f6; /* blue-500 */
+  --secondary-accent: #8b5cf6; /* purple-500 */
+  --gradient-start: #3b82f6; /* blue-600 */
+  --gradient-end: #8b5cf6; /* purple-600 */
+}
+
 /* Finance-Tech Hybrid Theme */
 [data-theme="finance-tech"] {
-  --primary-background: #1f2937; /* gray-800 */
-  --secondary-background: #374151; /* gray-700 */
   --primary-accent: #0f766e; /* teal-700 */
   --secondary-accent: #b45309; /* amber-700 (gold-like) */
-  --text-primary: #ffffff; /* white */
-  --text-secondary: #d1d5db; /* gray-300 */
-  --text-tertiary: #9ca3af; /* gray-400 */
-  --border-color: #4b5563; /* gray-600 */
-  --card-background: rgba(55, 65, 81, 0.5); /* gray-700/50 */
   --gradient-start: #0f766e; /* teal-700 */
   --gradient-end: #b45309; /* amber-700 */
 }
 
+/* Light mode adjustments for finance-tech */
+[data-color-mode="light"][data-theme="finance-tech"] {
+  --primary-background: #f0fdfa; /* teal-50 */
+  --secondary-background: #ccfbf1; /* teal-100 */
+}
+
 /* Bold Innovation Theme */
 [data-theme="bold-innovation"] {
-  --primary-background: #18181b; /* zinc-900 */
-  --secondary-background: #27272a; /* zinc-800 */
   --primary-accent: #d946ef; /* fuchsia-500 */
   --secondary-accent: #2dd4bf; /* teal-400 */
-  --text-primary: #ffffff; /* white */
-  --text-secondary: #d4d4d8; /* zinc-300 */
-  --text-tertiary: #a1a1aa; /* zinc-400 */
-  --border-color: #52525b; /* zinc-600 */
-  --card-background: rgba(39, 39, 42, 0.5); /* zinc-800/50 */
   --gradient-start: #d946ef; /* fuchsia-500 */
   --gradient-end: #2dd4bf; /* teal-400 */
+}
+
+/* Light mode adjustments for bold-innovation */
+[data-color-mode="light"][data-theme="bold-innovation"] {
+  --primary-background: #fdf4ff; /* fuchsia-50 */
+  --secondary-background: #fae8ff; /* fuchsia-100 */
+}
+
+/* Add smooth transitions for theme changes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom animation for dark/light toggle */
+.theme-transition {
+  animation: theme-fade 0.5s ease;
+}
+
+@keyframes theme-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

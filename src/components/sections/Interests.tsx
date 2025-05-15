@@ -1,6 +1,7 @@
 // src/components/sections/Interests/Interests.tsx
 import { motion } from "framer-motion";
 import { interests } from "@/data";
+import { InterestIcon } from "@/utils/interestIcons";
 
 const Interests = () => {
   return (
@@ -30,9 +31,14 @@ const Interests = () => {
               whileHover={{ y: -10 }}
               className="bg-card rounded-xl p-6 shadow-lg border border-border hover:border-primary-accent/30 transition-all duration-300"
             >
-              <h3 className="text-xl font-bold text-primary-accent mb-3">
-                {interest.name}
-              </h3>
+              <div className="flex items-center mb-4">
+                <div className="mr-4">
+                  <InterestIcon name={interest.icon} />
+                </div>
+                <h3 className="text-xl font-bold text-primary-accent">
+                  {interest.name}
+                </h3>
+              </div>
               <p className="text-text-secondary">{interest.description}</p>
             </motion.div>
           ))}

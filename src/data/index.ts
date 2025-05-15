@@ -1,4 +1,4 @@
-// src/data/index.ts
+// src/data/index.ts (Updated with 6 interests)
 
 export const personalInfo = {
   name: "Your Name",
@@ -66,21 +66,31 @@ export const interests = [
     name: "Yoga",
     description:
       "Practicing mindfulness and flexibility through regular yoga sessions.",
+    icon: "yoga",
   },
   {
     name: "Swimming",
     description: "Enjoy swimming laps for exercise and relaxation.",
+    icon: "swimming",
   },
   {
     name: "Tennis",
     description: "Competitive tennis player at the amateur level.",
+    icon: "tennis",
   },
   {
     name: "Pickleball",
     description: "Recently discovered and enjoying this fast-growing sport.",
+    icon: "ping-pong",
   },
   {
     name: "Hiking",
     description: "Exploring nature trails and enjoying the outdoors.",
+    icon: "mountain",
+  },
+  {
+    name: "Reading",
+    description: "Avid reader of non-fiction books on technology and business.",
+    icon: "book-open",
   },
 ];

@@ -15,4 +15,6 @@ export { default as Contact } from "@/components/sections/Contact";
 
 // UI components
 export { default as ThemeSelector } from "@/components/ui/ThemeSelector";
+export { default as ThemePicker } from "@/components/ui/ThemePicker";
+export { default as ColorModeToggle } from "@/components/ui/ColorModeToggle";
 // Add more UI components as you create them

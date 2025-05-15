@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo } from "../../data";
-import ThemeSelector from "../ui/ThemeSelector"; // Import our new ThemeSelector
+import { ColorModeToggle, ThemePicker } from "..";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -78,15 +78,19 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Add theme selector to desktop navigation */}
-          <ThemeSelector />
+          {/* Theme controls */}
+          <div className="flex items-center space-x-4">
+            <ColorModeToggle />
+            <ThemePicker />
+          </div>
         </div>
 
         {/* Mobile Navigation Toggle */}
         <div className="md:hidden flex items-center">
-          {/* Add theme selector to mobile view, before the menu button */}
-          <div className="mr-4">
-            <ThemeSelector />
+          {/* Theme controls for mobile */}
+          <div className="flex items-center space-x-3 mr-4">
+            <ColorModeToggle />
+            <ThemePicker />
           </div>
 
           <button
