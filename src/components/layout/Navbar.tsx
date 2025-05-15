@@ -1,14 +1,15 @@
 // src/components/layout/Navbar.tsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo } from "../../data";
 import { ColorModeToggle, ThemePicker } from "..";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(true); // Start with scrolled state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
+  const initialRenderRef = useRef(true);
 
   // Navigation items
   const navItems = [
@@ -28,7 +29,7 @@ const Navbar = () => {
       setWindowWidth(window.innerWidth);
     };
 
-    // Set initial width (important for SSR)
+    // Set initial width
     if (typeof window !== "undefined") {
       updateWindowDimensions();
     }
@@ -40,9 +41,29 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", updateWindowDimensions);
   }, []);
 
-  // Handle scroll effect
+  // One-time initialization effect to set correct scroll state
+  useEffect(() => {
+    if (initialRenderRef.current) {
+      // Force compact navbar on first render
+      setIsScrolled(true);
+
+      // After a very short delay, check actual scroll position
+      const timer = setTimeout(() => {
+        if (window.scrollY <= 50) {
+          setIsScrolled(false);
+        }
+        initialRenderRef.current = false;
+      }, 100);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  // Handle scroll effect (after initial render)
   useEffect(() => {
     const handleScroll = () => {
+      if (initialRenderRef.current) return;
+
       if (window.scrollY > 50) {
         setIsScrolled(true);
       } else {
@@ -70,23 +91,18 @@ const Navbar = () => {
     <header
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-primary-background/90 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+          ? "bg-primary-background/90 backdrop-blur-md shadow-lg py-2"
+          : "bg-transparent py-4 md:py-6"
       }`}
-      style={{
-        paddingTop: isScrolled ? "0.5rem" : "0.75rem",
-        paddingBottom: isScrolled ? "0.5rem" : "0.75rem",
-      }}
     >
-      <div className="w-full max-w-6xl mx-auto px-4 flex justify-between items-center">
+      <div className="relative w-full max-w-6xl mx-auto px-3 sm:px-4 flex justify-between items-center">
         <Link
           to="home"
           spy={true}
           smooth={true}
           offset={-70}
           duration={500}
-          className="text-xl font-bold text-primary-accent cursor-pointer truncate"
-          style={{ maxWidth: isMobile ? "120px" : "none" }}
+          className="text-xl font-bold text-primary-accent cursor-pointer truncate max-w-[150px] sm:max-w-none"
         >
           {displayName}
         </Link>
@@ -117,22 +133,21 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation Toggle */}
-        <div className="md:hidden flex items-center">
+        {/* Mobile Navigation Toggle - Fixed Right Aligned */}
+        <div
+          className="md:hidden flex items-center justify-end"
+          style={{ minWidth: "80px" }}
+        >
           {/* Theme controls for mobile - more compact */}
-          <div
-            className="flex items-center"
-            style={{ gap: "0.375rem", marginRight: "0.375rem" }}
-          >
-            <ColorModeToggle />
-            <ThemePicker />
-          </div>
+          <ColorModeToggle />
+          <div className="w-2"></div>
+          <ThemePicker />
+          <div className="w-2"></div>
 
           <button
-            className="text-text-primary focus:outline-none ml-1"
+            className="text-text-primary focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
-            style={{ marginLeft: "0.25rem" }}
           >
             {isMobileMenuOpen ? (
               <svg
