@@ -4,7 +4,7 @@ export const personalInfo = {
   name: "Yuksel Polat Akbiyik",
   shortName: "Polat",
   title: "Software Engineer | Crypto Enthusiast | Personal Finance Advocate",
-  email: "your.email@example.com",
+  email: "ypolat99yupa@gmail.com",
   github: "https://github.com/oopsie-doosie/",
   linkedin: "https://www.linkedin.com/in/ypolat99/",
   bio: "UCLA graduate with dual degrees in Computer Science and Economics, currently working at Goldman Sachs and developing innovative AI solutions.",

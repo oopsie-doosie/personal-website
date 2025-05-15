@@ -80,9 +80,6 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  // Determine if on mobile
-  const isMobile = windowWidth > 0 && windowWidth < 768;
-
   // Use short name on very small screens
   const displayName =
     windowWidth < 400 ? personalInfo.shortName : personalInfo.name;
