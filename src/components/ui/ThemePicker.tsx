@@ -43,26 +43,21 @@ const ThemePicker = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 5 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 p-2 bg-card rounded-lg shadow-lg border border-border z-50 min-w-[150px]"
+            className="absolute right-0 mt-2 p-3 bg-card rounded-lg shadow-lg border border-border z-50 flex flex-col gap-4"
           >
             {themeOptions.map((option) => (
               <motion.button
                 key={option.value}
                 onClick={() => handleThemeChange(option.value)}
-                className={`flex items-center space-x-2 w-full text-left p-2 rounded-md ${
-                  theme === option.value
-                    ? "bg-primary-accent/20"
-                    : "hover:bg-secondary-background"
+                className={`w-6 h-6 rounded-full ${
+                  theme === option.value ? "ring-2 ring-text-primary" : ""
                 }`}
-                whileHover={{ x: 5 }}
+                whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.2 }}
-              >
-                <span
-                  className="w-4 h-4 rounded-full flex-shrink-0 border border-border"
-                  style={{ backgroundColor: option.color }}
-                />
-                <span className="text-sm">{option.label}</span>
-              </motion.button>
+                style={{ backgroundColor: option.color }}
+                aria-label={`${option.label} theme`}
+                title={option.label}
+              />
             ))}
           </motion.div>
         )}

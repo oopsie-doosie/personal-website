@@ -1,4 +1,4 @@
-// src/components/sections/Projects/Projects.tsx
+// src/components/sections/Projects.tsx
 import { motion } from "framer-motion";
 import { projects } from "@/data";
 

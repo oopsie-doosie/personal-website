@@ -1,4 +1,4 @@
-// src/components/sections/About/About.tsx
+// src/components/sections/About.tsx
 import { motion } from "framer-motion";
 import { personalInfo, education } from "@/data"; // Updated import path
 

@@ -1,4 +1,4 @@
-// src/components/sections/Experience/Experience.tsx
+// src/components/sections/Experience.tsx
 import { motion } from "framer-motion";
 import { experience } from "@/data";
 

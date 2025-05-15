@@ -1,4 +1,4 @@
-// src/components/sections/Contact/Contact.tsx
+// src/components/sections/Contact.tsx
 import { motion } from "framer-motion";
 import { personalInfo } from "@/data";
 

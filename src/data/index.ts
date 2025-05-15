@@ -1,4 +1,4 @@
-// src/data/index.ts (Updated with 6 interests)
+// src/data/index.ts
 
 export const personalInfo = {
   name: "Your Name",
@@ -52,13 +52,49 @@ export const projects = [
   },
 ];
 
+// Updated skills with isBold property for highlighting key skills
+export interface Skill {
+  name: string;
+  isBold: boolean;
+}
+
 export const skills = {
-  languages: ["JavaScript", "TypeScript", "Python", "Java", "C++"],
-  frontend: ["React", "HTML", "CSS", "Tailwind", "Framer Motion"],
-  backend: ["Node.js", "Express", "Django", "Flask"],
-  databases: ["MongoDB", "PostgreSQL", "MySQL"],
-  tools: ["Git", "Docker", "AWS", "Azure"],
-  other: ["Machine Learning", "Data Analysis", "Financial Modeling"],
+  languages: [
+    { name: "TypeScript", isBold: true },
+    { name: "JavaScript", isBold: true },
+    { name: "Python", isBold: true },
+    { name: "Java", isBold: false },
+    { name: "C++", isBold: false },
+  ],
+  frontend: [
+    { name: "React", isBold: true },
+    { name: "Tailwind CSS", isBold: true },
+    { name: "HTML", isBold: true },
+    { name: "CSS", isBold: true },
+    { name: "Framer Motion", isBold: false },
+  ],
+  backend: [
+    { name: "Node.js", isBold: true },
+    { name: "Express", isBold: true },
+    { name: "Django", isBold: false },
+    { name: "Flask", isBold: false },
+  ],
+  databases: [
+    { name: "MongoDB", isBold: true },
+    { name: "PostgreSQL", isBold: true },
+    { name: "MySQL", isBold: false },
+  ],
+  tools: [
+    { name: "Git", isBold: true },
+    { name: "Docker", isBold: true },
+    { name: "AWS", isBold: false },
+    { name: "Azure", isBold: false },
+  ],
+  other: [
+    { name: "Machine Learning", isBold: false },
+    { name: "Data Analysis", isBold: true },
+    { name: "Financial Modeling", isBold: true },
+  ],
 };
 
 export const interests = [

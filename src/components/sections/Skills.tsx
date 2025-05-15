@@ -1,4 +1,4 @@
-// src/components/sections/Skills/Skills.tsx
+// src/components/sections/Skills.tsx
 import { motion } from "framer-motion";
 import { skills } from "@/data";
 
@@ -69,9 +69,23 @@ const Skills = () => {
                     <motion.span
                       key={index}
                       variants={itemVariants}
-                      className="bg-gradient-primary/20 text-text-primary border border-primary-accent/30 px-3 py-1.5 rounded-full text-sm hover:bg-gradient-primary/40 transition-colors"
+                      className={`
+                        bg-gradient-primary/20 
+                        text-text-primary 
+                        border border-primary-accent/30 
+                        px-3 py-1.5 
+                        rounded-full 
+                        text-sm 
+                        hover:bg-gradient-primary/40 
+                        transition-colors
+                        ${
+                          skill.isBold
+                            ? "font-bold border-primary-accent"
+                            : "font-normal"
+                        }
+                      `}
                     >
-                      {skill}
+                      {skill.name}
                     </motion.span>
                   )
                 )}

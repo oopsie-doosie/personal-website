@@ -1,4 +1,4 @@
-// src/components/sections/Hero/Hero.tsx
+// src/components/sections/Hero.tsx
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
