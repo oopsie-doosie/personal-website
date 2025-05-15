@@ -3,12 +3,13 @@ import { motion } from "framer-motion";
 import { skills } from "@/data";
 
 const Skills = () => {
+  // Updated categories to include deployment
   const categories = [
     { key: "languages", title: "Programming Languages" },
     { key: "frontend", title: "Frontend Technologies" },
     { key: "backend", title: "Backend Technologies" },
     { key: "databases", title: "Databases" },
-    { key: "tools", title: "Tools & Platforms" },
+    { key: "deployment", title: "Deployment & DevOps" },
     { key: "other", title: "Other Skills" },
   ];
 
@@ -44,54 +45,56 @@ const Skills = () => {
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categories.map((category) => (
-            <motion.div
-              key={category.key}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="bg-card rounded-xl p-6 shadow-lg"
-            >
-              <h3 className="text-xl font-bold text-primary-accent mb-4">
-                {category.title}
-              </h3>
+          {categories.map((category) => {
+            // Check if the category exists in the skills object
+            const categorySkills =
+              skills[category.key as keyof typeof skills] || [];
 
+            return (
               <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
+                key={category.key}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
-                className="flex flex-wrap gap-2"
+                className="bg-card rounded-xl p-6 shadow-lg hover:shadow-md transition-shadow duration-300"
               >
-                {skills[category.key as keyof typeof skills].map(
-                  (skill, index) => (
+                <h3 className="text-lg md:text-xl font-bold mb-4 text-primary-accent">
+                  {category.title}
+                </h3>
+
+                <motion.div
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="flex flex-wrap gap-2"
+                >
+                  {categorySkills.map((skill, index) => (
                     <motion.span
-                      key={index}
+                      key={`${category.key}-${index}`}
                       variants={itemVariants}
+                      whileHover={{ scale: 1.05 }}
                       className={`
-                        bg-gradient-primary/20 
-                        text-text-primary 
-                        border border-primary-accent/30 
+                        inline-block
                         px-3 py-1.5 
-                        rounded-full 
-                        text-sm 
-                        hover:bg-gradient-primary/40 
-                        transition-colors
+                        rounded-md
+                        text-sm
+                        transition-all duration-200
                         ${
                           skill.isBold
-                            ? "font-bold border-primary-accent"
-                            : "font-normal"
+                            ? "bg-primary-accent/10 text-primary-accent border border-primary-accent/30 font-semibold"
+                            : "bg-secondary-background/30 text-text-secondary"
                         }
                       `}
                     >
                       {skill.name}
                     </motion.span>
-                  )
-                )}
+                  ))}
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
