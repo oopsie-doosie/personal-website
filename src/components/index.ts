@@ -1,8 +1,8 @@
 // src/components/index.ts
 
 // Layout components
-export { default as Navbar } from "./layout/Navbar";
-export { default as Footer } from "./layout/Footer";
+export { default as Navbar } from "@/components/layout/Navbar";
+export { default as Footer } from "@/components/layout/Footer";
 
 // Section components
 export { default as Hero } from "@/components/sections/Hero";
@@ -14,7 +14,5 @@ export { default as Interests } from "@/components/sections/Interests";
 export { default as Contact } from "@/components/sections/Contact";
 
 // UI components
-// export { default as Button } from './ui/Button';
+export { default as ThemeSelector } from "@/components/ui/ThemeSelector";
 // Add more UI components as you create them
-
-// Add any other components you want to export

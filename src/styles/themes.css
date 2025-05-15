@@ -1,0 +1,46 @@
+/* src/styles/themes.css */
+
+:root {
+  /* Default theme (Tech-Forward Dark) */
+  --primary-background: #0f172a; /* slate-900 */
+  --secondary-background: #1e293b; /* slate-800 */
+  --primary-accent: #3b82f6; /* blue-500 */
+  --secondary-accent: #8b5cf6; /* purple-500 */
+  --text-primary: #ffffff; /* white */
+  --text-secondary: #cbd5e1; /* slate-300 */
+  --text-tertiary: #94a3b8; /* slate-400 */
+  --border-color: #334155; /* slate-700 */
+  --card-background: rgba(30, 41, 59, 0.5); /* slate-800/50 */
+  --gradient-start: #3b82f6; /* blue-600 */
+  --gradient-end: #8b5cf6; /* purple-600 */
+}
+
+/* Finance-Tech Hybrid Theme */
+[data-theme="finance-tech"] {
+  --primary-background: #1f2937; /* gray-800 */
+  --secondary-background: #374151; /* gray-700 */
+  --primary-accent: #0f766e; /* teal-700 */
+  --secondary-accent: #b45309; /* amber-700 (gold-like) */
+  --text-primary: #ffffff; /* white */
+  --text-secondary: #d1d5db; /* gray-300 */
+  --text-tertiary: #9ca3af; /* gray-400 */
+  --border-color: #4b5563; /* gray-600 */
+  --card-background: rgba(55, 65, 81, 0.5); /* gray-700/50 */
+  --gradient-start: #0f766e; /* teal-700 */
+  --gradient-end: #b45309; /* amber-700 */
+}
+
+/* Bold Innovation Theme */
+[data-theme="bold-innovation"] {
+  --primary-background: #18181b; /* zinc-900 */
+  --secondary-background: #27272a; /* zinc-800 */
+  --primary-accent: #d946ef; /* fuchsia-500 */
+  --secondary-accent: #2dd4bf; /* teal-400 */
+  --text-primary: #ffffff; /* white */
+  --text-secondary: #d4d4d8; /* zinc-300 */
+  --text-tertiary: #a1a1aa; /* zinc-400 */
+  --border-color: #52525b; /* zinc-600 */
+  --card-background: rgba(39, 39, 42, 0.5); /* zinc-800/50 */
+  --gradient-start: #d946ef; /* fuchsia-500 */
+  --gradient-end: #2dd4bf; /* teal-400 */
+}

@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global styles that use theme variables */
+body {
+  background-color: var(--primary-background);
+  color: var(--text-primary);
+}
+
+/* Adding some transition effects for smooth theme changes */
+* {
+  transition-property: color, background-color, border-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in-out;
+}

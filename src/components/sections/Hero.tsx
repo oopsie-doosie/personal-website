@@ -26,21 +26,27 @@ const Hero = () => {
     });
   }, []);
 
-  // Generate particles for the background
+  // Generate particles for the background with theme-aware colors
   const renderParticles = () => {
     const particles = [];
+    const opacities = ["10", "20", "30"]; // opacity variants
+    const sizes = ["1", "2", "3"]; // size variants
+
     for (let i = 0; i < 20; i++) {
+      const opacity = opacities[Math.floor(Math.random() * opacities.length)];
+      const size = sizes[Math.floor(Math.random() * sizes.length)];
+
       particles.push(
         <div
           key={i}
-          className={`particle absolute rounded-full bg-blue-${Math.floor(
-            Math.random() * 5 + 4
-          )}00 opacity-${Math.floor(Math.random() * 3 + 1)}0 w-${Math.floor(
-            Math.random() * 3 + 1
-          )} h-${Math.floor(Math.random() * 3 + 1)}`}
+          className={`particle absolute rounded-full bg-primary-accent opacity-${opacity} w-${size} h-${size}`}
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
+            backgroundColor: "var(--primary-accent)", // Explicit use of CSS variable for particle color
+            opacity: Number(opacity) / 100,
+            width: `${Number(size) * 0.25}rem`,
+            height: `${Number(size) * 0.25}rem`,
           }}
         />
       );
@@ -100,7 +106,6 @@ const Hero = () => {
     },
     hover: {
       scale: 1.05,
-      backgroundColor: "#2563EB", // blue-600
       transition: {
         duration: 0.3,
       },
@@ -114,7 +119,7 @@ const Hero = () => {
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
       {/* Background with particles and gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+      <div className="absolute inset-0 bg-gradient-to-b from-primary-background via-secondary-background to-primary-background">
         {renderParticles()}
       </div>
 
@@ -126,15 +131,15 @@ const Hero = () => {
           animate="visible"
           className="text-5xl md:text-7xl font-bold mb-6"
         >
-          <span className="text-white">Hi, I'm </span>
-          <span className="text-blue-500">{personalInfo.name}</span>
+          <span className="text-text-primary">Hi, I'm </span>
+          <span className="text-primary-accent">{personalInfo.name}</span>
         </motion.h1>
 
         <motion.h2
           variants={subtitleVariants}
           initial="hidden"
           animate="visible"
-          className="text-2xl md:text-3xl text-slate-300 mb-8"
+          className="text-2xl md:text-3xl text-text-secondary mb-8"
         >
           {personalInfo.title}
         </motion.h2>
@@ -143,7 +148,7 @@ const Hero = () => {
           variants={descriptionVariants}
           initial="hidden"
           animate="visible"
-          className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-12"
+          className="text-lg md:text-xl text-text-tertiary max-w-2xl mx-auto mb-12"
         >
           Building innovative solutions at Goldman Sachs and developing
           cutting-edge AI analytics tools for hedge funds.
@@ -162,7 +167,7 @@ const Hero = () => {
             smooth={true}
             offset={-70}
             duration={800}
-            className="btn bg-blue-600 hover:bg-blue-700 text-white border-none px-8 py-3 rounded-md cursor-pointer inline-block"
+            className="btn bg-primary-accent hover:bg-secondary-accent text-text-primary border-none px-8 py-3 rounded-md cursor-pointer inline-block transition-colors"
           >
             Learn More
           </Link>
@@ -170,7 +175,7 @@ const Hero = () => {
       </div>
 
       {/* Decorative bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900 to-transparent pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-primary-background to-transparent pointer-events-none"></div>
     </section>
   );
 };

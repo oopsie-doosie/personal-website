@@ -1,13 +1,5 @@
 // src/App.tsx
-
 import { useEffect } from "react";
-// import About from "./components/sections/About/About";
-// import Experience from "./components/sections/Experience/Experience";
-// import Projects from "./components/sections/Projects/Projects";
-// import Skills from "./components/sections/Skills/Skills";
-// import Interests from "./components/sections/Interests/Interests";
-// import Contact from "./components/sections/Contact/Contact";
-// import Footer from "./components/layout/Footer";
 
 import {
   Navbar,
@@ -28,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white">
+    <div className="min-h-screen bg-primary-background text-text-primary">
       <Navbar />
       <main>
         <Hero />

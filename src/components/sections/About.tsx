@@ -1,12 +1,12 @@
 // src/components/sections/About/About.tsx
 import { motion } from "framer-motion";
-import { personalInfo, education } from "../../data";
+import { personalInfo, education } from "@/data"; // Updated import path
 
 const About = () => {
   return (
     <section
       id="about"
-      className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"
+      className="py-20 bg-gradient-to-b from-primary-background via-secondary-background to-primary-background"
     >
       <div className="container mx-auto px-4">
         <motion.h2
@@ -26,27 +26,30 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
-            className="bg-slate-800/50 rounded-xl p-8 shadow-lg"
+            className="bg-card rounded-xl p-8 shadow-lg"
           >
-            <h3 className="text-2xl font-semibold mb-4 text-blue-400">
+            <h3 className="text-2xl font-semibold mb-4 text-primary-accent">
               Professional Profile
             </h3>
-            <p className="text-lg text-slate-300 leading-relaxed">
+            <p className="text-lg text-text-secondary leading-relaxed">
               {personalInfo.bio}
             </p>
 
-            <div className="mt-6 text-slate-400">
+            <div className="mt-6 text-text-tertiary">
               <p>
-                <span className="font-semibold text-white">Email: </span>
+                <span className="font-semibold text-text-primary">Email: </span>
                 {personalInfo.email}
               </p>
               <p className="mt-2">
-                <span className="font-semibold text-white">GitHub: </span>
+                <span className="font-semibold text-text-primary">
+                  GitHub:{" "}
+                </span>
+
                 <a
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-400 hover:text-blue-300 transition-colors"
+                  className="text-primary-accent hover:text-secondary-accent transition-colors"
                 >
                   {personalInfo.github.replace("https://github.com/", "")}
                 </a>
@@ -60,20 +63,22 @@ const About = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="bg-slate-800/50 rounded-xl p-8 shadow-lg"
+            className="bg-card rounded-xl p-8 shadow-lg"
           >
-            <h3 className="text-2xl font-semibold mb-4 text-blue-400">
+            <h3 className="text-2xl font-semibold mb-4 text-primary-accent">
               Education
             </h3>
 
             {education.map((item, index) => (
               <div key={index} className="mb-6 last:mb-0">
-                <h4 className="text-xl font-medium text-white">
+                <h4 className="text-xl font-medium text-text-primary">
                   {item.degree}
                 </h4>
-                <p className="text-lg text-blue-300 mt-1">{item.institution}</p>
-                <p className="text-slate-400 mt-1">{item.duration}</p>
-                <p className="text-slate-300 mt-3">{item.description}</p>
+                <p className="text-lg text-primary-accent mt-1">
+                  {item.institution}
+                </p>
+                <p className="text-text-tertiary mt-1">{item.duration}</p>
+                <p className="text-text-secondary mt-3">{item.description}</p>
               </div>
             ))}
           </motion.div>
@@ -85,9 +90,9 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl p-8 border border-blue-500/30"
+          className="mt-16 bg-gradient-primary/20 rounded-xl p-8 border border-primary-accent/30"
         >
-          <p className="text-xl italic text-center text-slate-300 leading-relaxed">
+          <p className="text-xl italic text-center text-text-secondary leading-relaxed">
             "I believe in combining technical expertise with creative
             problem-solving to build solutions that make a meaningful impact. My
             background in both Computer Science and Economics gives me a unique

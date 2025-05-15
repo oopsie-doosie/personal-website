@@ -6,7 +6,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"
+      className="py-20 bg-gradient-to-b from-primary-background via-secondary-background to-primary-background"
     >
       <div className="container mx-auto px-4">
         <motion.h2
@@ -19,7 +19,7 @@ const Contact = () => {
           Connect With Me
         </motion.h2>
 
-        <div className="max-w-3xl mx-auto bg-slate-800/50 rounded-xl p-8 shadow-lg">
+        <div className="max-w-3xl mx-auto bg-card rounded-xl p-8 shadow-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
@@ -27,36 +27,37 @@ const Contact = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-bold text-blue-400 mb-4">
+              <h3 className="text-2xl font-bold text-primary-accent mb-4">
                 Get In Touch
               </h3>
-              <p className="text-slate-300 mb-6">
+              <p className="text-text-secondary mb-6">
                 I'm always open to discussing new projects, opportunities or
                 partnerships.
               </p>
 
               <ul className="space-y-4">
-                <li className="flex items-center text-slate-300">
+                <li className="flex items-center text-text-secondary">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-3 text-blue-400"
+                    className="h-5 w-5 mr-3 text-primary-accent"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                   </svg>
+
                   <a
                     href={`mailto:${personalInfo.email}`}
-                    className="hover:text-blue-400 transition-colors"
+                    className="hover:text-primary-accent transition-colors"
                   >
                     {personalInfo.email}
                   </a>
                 </li>
-                <li className="flex items-center text-slate-300">
+                <li className="flex items-center text-text-secondary">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-3 text-blue-400"
+                    className="h-5 w-5 mr-3 text-primary-accent"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -66,11 +67,12 @@ const Contact = () => {
                       clipRule="evenodd"
                     />
                   </svg>
+
                   <a
                     href={personalInfo.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-blue-400 transition-colors"
+                    className="hover:text-primary-accent transition-colors"
                   >
                     GitHub
                   </a>
@@ -83,9 +85,9 @@ const Contact = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-slate-700/30 p-6 rounded-lg"
+              className="bg-secondary-background/30 p-6 rounded-lg"
             >
-              <h3 className="text-xl font-semibold text-blue-400 mb-4">
+              <h3 className="text-xl font-semibold text-primary-accent mb-4">
                 Quick Message
               </h3>
               <form>
@@ -93,26 +95,26 @@ const Contact = () => {
                   <input
                     type="text"
                     placeholder="Your Name"
-                    className="w-full px-4 py-2 rounded bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2 rounded bg-secondary-background border border-border text-text-primary focus:outline-none focus:border-primary-accent"
                   />
                 </div>
                 <div className="mb-4">
                   <input
                     type="email"
                     placeholder="Your Email"
-                    className="w-full px-4 py-2 rounded bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2 rounded bg-secondary-background border border-border text-text-primary focus:outline-none focus:border-primary-accent"
                   />
                 </div>
                 <div className="mb-4">
                   <textarea
                     placeholder="Your Message"
                     rows={4}
-                    className="w-full px-4 py-2 rounded bg-slate-800 border border-slate-700 text-white focus:outline-none focus:border-blue-500"
+                    className="w-full px-4 py-2 rounded bg-secondary-background border border-border text-text-primary focus:outline-none focus:border-primary-accent"
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="btn bg-blue-600 hover:bg-blue-700 text-white border-none px-6 py-2 rounded-md"
+                  className="btn bg-primary-accent hover:bg-secondary-accent text-text-primary border-none px-6 py-2 rounded-md transition-colors"
                 >
                   Send Message
                 </button>
@@ -126,7 +128,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
           viewport={{ once: true }}
-          className="text-center text-slate-400 mt-12"
+          className="text-center text-text-tertiary mt-12"
         >
           Looking forward to connecting with you!
         </motion.p>

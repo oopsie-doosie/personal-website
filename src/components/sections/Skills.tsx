@@ -1,6 +1,6 @@
 // src/components/sections/Skills/Skills.tsx
 import { motion } from "framer-motion";
-import { skills } from "../../data";
+import { skills } from "@/data";
 
 const Skills = () => {
   const categories = [
@@ -30,7 +30,7 @@ const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900"
+      className="py-20 bg-gradient-to-b from-primary-background via-secondary-background to-primary-background"
     >
       <div className="container mx-auto px-4">
         <motion.h2
@@ -51,9 +51,9 @@ const Skills = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-slate-800/50 rounded-xl p-6 shadow-lg"
+              className="bg-card rounded-xl p-6 shadow-lg"
             >
-              <h3 className="text-xl font-bold text-blue-400 mb-4">
+              <h3 className="text-xl font-bold text-primary-accent mb-4">
                 {category.title}
               </h3>
 
@@ -69,7 +69,7 @@ const Skills = () => {
                     <motion.span
                       key={index}
                       variants={itemVariants}
-                      className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 text-white border border-blue-500/30 px-3 py-1.5 rounded-full text-sm hover:bg-gradient-to-r hover:from-blue-600/40 hover:to-purple-600/40 transition-colors"
+                      className="bg-gradient-primary/20 text-text-primary border border-primary-accent/30 px-3 py-1.5 rounded-full text-sm hover:bg-gradient-primary/40 transition-colors"
                     >
                       {skill}
                     </motion.span>

@@ -5,14 +5,14 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-800 py-10 border-t border-slate-700">
+    <footer className="bg-secondary-background py-10 border-t border-border">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <h3 className="text-2xl font-bold text-blue-500 mb-2">
+            <h3 className="text-2xl font-bold text-primary-accent mb-2">
               {personalInfo.name}
             </h3>
-            <p className="text-slate-400">{personalInfo.title}</p>
+            <p className="text-text-tertiary">{personalInfo.title}</p>
           </div>
 
           <div className="flex space-x-6 mb-6 md:mb-0">
@@ -20,7 +20,7 @@ const Footer = () => {
               href={personalInfo.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-blue-400 transition-colors"
+              className="text-text-tertiary hover:text-primary-accent transition-colors"
               aria-label="GitHub"
             >
               <svg
@@ -41,7 +41,7 @@ const Footer = () => {
 
             <a
               href={`mailto:${personalInfo.email}`}
-              className="text-slate-400 hover:text-blue-400 transition-colors"
+              className="text-text-tertiary hover:text-primary-accent transition-colors"
               aria-label="Email"
             >
               <svg
@@ -63,11 +63,11 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-slate-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-slate-400 text-sm mb-4 md:mb-0">
+        <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-text-tertiary text-sm mb-4 md:mb-0">
             © {currentYear} {personalInfo.name}. All rights reserved.
           </p>
-          <p className="text-slate-500 text-xs">
+          <p className="text-text-tertiary opacity-70 text-xs">
             Built with React, TypeScript, and Tailwind CSS
           </p>
         </div>

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo } from "../../data";
+import ThemeSelector from "../ui/ThemeSelector"; // Import our new ThemeSelector
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,7 +43,7 @@ const Navbar = () => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-slate-900/90 backdrop-blur-md py-3 shadow-lg"
+          ? "bg-primary-background/90 backdrop-blur-md py-3 shadow-lg"
           : "bg-transparent py-6"
       }`}
     >
@@ -53,33 +54,43 @@ const Navbar = () => {
           smooth={true}
           offset={-70}
           duration={500}
-          className="text-xl font-bold text-blue-500 cursor-pointer"
+          className="text-xl font-bold text-primary-accent cursor-pointer"
         >
           {personalInfo.name}
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.target}
-              to={item.target}
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-              className="cursor-pointer hover:text-blue-500 transition-colors"
-              activeClass="text-blue-500"
-            >
-              {item.name}
-            </Link>
-          ))}
+        <div className="hidden md:flex items-center">
+          <div className="flex space-x-8 mr-6">
+            {navItems.map((item) => (
+              <Link
+                key={item.target}
+                to={item.target}
+                spy={true}
+                smooth={true}
+                offset={-70}
+                duration={500}
+                className="cursor-pointer hover:text-primary-accent transition-colors"
+                activeClass="text-primary-accent"
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Add theme selector to desktop navigation */}
+          <ThemeSelector />
         </div>
 
         {/* Mobile Navigation Toggle */}
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center">
+          {/* Add theme selector to mobile view, before the menu button */}
+          <div className="mr-4">
+            <ThemeSelector />
+          </div>
+
           <button
-            className="text-white focus:outline-none"
+            className="text-text-primary focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
@@ -124,7 +135,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-slate-800 shadow-lg"
+            className="md:hidden bg-secondary-background shadow-lg"
           >
             <div className="container mx-auto px-4 py-4">
               <div className="flex flex-col space-y-4">
@@ -136,8 +147,8 @@ const Navbar = () => {
                     smooth={true}
                     offset={-70}
                     duration={500}
-                    className="cursor-pointer hover:text-blue-500 transition-colors py-2"
-                    activeClass="text-blue-500"
+                    className="cursor-pointer hover:text-primary-accent transition-colors py-2"
+                    activeClass="text-primary-accent"
                     onClick={handleMobileNavClick}
                   >
                     {item.name}
