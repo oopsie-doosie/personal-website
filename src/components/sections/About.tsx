@@ -96,7 +96,7 @@ const About = () => {
             "I believe in combining technical expertise with creative
             problem-solving to build solutions that make a meaningful impact. My
             background in both Computer Science and Economics gives me a unique
-            perspective on developing technology that delivers real value."
+            perspective on developing technology that delivers value."
           </p>
         </motion.div>
       </div>

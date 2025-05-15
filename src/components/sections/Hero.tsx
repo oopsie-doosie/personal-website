@@ -132,7 +132,7 @@ const Hero = () => {
           className="text-5xl md:text-7xl font-bold mb-6"
         >
           <span className="text-text-primary">Hi, I'm </span>
-          <span className="text-primary-accent">{personalInfo.name}</span>
+          <span className="text-primary-accent">{personalInfo.shortName}</span>
         </motion.h1>
 
         <motion.h2

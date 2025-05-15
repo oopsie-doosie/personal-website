@@ -1,10 +1,12 @@
 // src/data/index.ts
 
 export const personalInfo = {
-  name: "Your Name",
-  title: "Software Engineer & AI Enthusiast",
+  name: "Yuksel Polat Akbiyik",
+  shortName: "Polat",
+  title: "Software Engineer | Crypto Enthusiast | Personal Finance Advocate",
   email: "your.email@example.com",
-  github: "https://github.com/yourusername",
+  github: "https://github.com/oopsie-doosie/",
+  linkedin: "https://www.linkedin.com/in/ypolat99/",
   bio: "UCLA graduate with dual degrees in Computer Science and Economics, currently working at Goldman Sachs and developing innovative AI solutions.",
 };
 
@@ -13,41 +15,65 @@ export const education = [
     degree: "Bachelor of Science in Computer Science",
     institution: "University of California, Los Angeles (UCLA)",
     duration: "2018 - 2022",
-    description: "Double majored in Computer Science and Economics",
+    description:
+      "Focused on ML, AI, Data Sciene and software engineering principles. Developed a strong foundation in algorithms, data structures.",
+  },
+  {
+    degree: "Bachelor of Arts in Economics",
+    institution: "University of California, Los Angeles (UCLA)",
+    duration: "2018 - 2022",
+    description: "Specialized in econometrics and quantitative analysis",
   },
 ];
 
 export const experience = [
   {
-    position: "Software Engineer",
+    position: "Full Stack Developer",
     company: "Goldman Sachs",
     duration: "2022 - Present",
     description:
-      "Developing high-performance financial software solutions and analytics tools.",
+      "Developing high-performance financial software solutions and analytics tools that process large-scale data sets, with a focus on improving efficiency and productivity.",
     responsibilities: [
-      "Designed and implemented trading algorithms",
-      "Optimized data processing pipelines",
-      "Collaborated with stakeholders to deliver solutions",
+      "Designed and implemented both frontend and backend components for financial applications",
+      "Automated regular tasks, reducing processing time from 25 minutes to under 2 minutes",
+      "Managed and mentored an intern, providing guidance throughout their project lifecycle",
+      "Serving on the New Joiners Committee to improve onboarding experience",
+      "Collaborated with stakeholders to deliver end-to-end solutions",
     ],
   },
 ];
 
 export const projects = [
   {
-    title: "AI Analytics Platform for Hedge Funds",
+    title: "Crypto Insights: Analytics Platform for Digital Assets",
     description:
       "An analytics tool targeting hedge funds that provides deep insights into market data and trading patterns.",
     highlights: [
       "Multiple funds have expressed interest",
       "Potential 7-figure valuation",
       "Combines AI and financial expertise",
+      "Pattern recognition and anomaly detection",
+      "Real-time integration of on-chain metrics and macro economic signals.",
     ],
-    technologies: ["React", "TypeScript", "Python", "TensorFlow", "AWS"],
+    technologies: [
+      "React",
+      "TypeScript",
+      "Python",
+      "FastAPI",
+      "InfluxDB",
+      "Docker",
+      "Redis",
+    ],
   },
   {
     title: "Personal Anonymous Blog",
     description:
       "A detailed personal blog with a focus on technical topics and industry insights.",
+    highlights: [
+      "Personal journal with book reviews, travel logs, and monthly finance updates",
+      "Minimalist and responsive design with dark/light mode that is ready for expansion",
+      "Personal experiment to improve writing skills and document life journey",
+    ],
     technologies: ["React", "TypeScript", "Tailwind CSS", "Sanity.io"],
   },
 ];
@@ -136,5 +162,17 @@ export const interests = [
     name: "Reading",
     description: "Avid reader of non-fiction books on technology and business.",
     icon: "book-open",
+  },
+  {
+    name: "Crypto",
+    description:
+      "Exploring blockchain technology and cryptocurrency investments.",
+    icon: "crypto",
+  },
+  {
+    name: "Personal Finance",
+    description:
+      "Optimizing finances and working toward FIRE while still enjoying life.",
+    icon: "finance",
   },
 ];

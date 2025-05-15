@@ -1,6 +1,7 @@
 // src/components/sections/Contact.tsx
 import { motion } from "framer-motion";
 import { personalInfo } from "@/data";
+import { SocialIcon } from "@/utils/socialIcons";
 
 const Contact = () => {
   return (
@@ -36,45 +37,41 @@ const Contact = () => {
               </p>
 
               <ul className="space-y-4">
-                <li className="flex items-center text-text-secondary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-3 text-primary-accent"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                  </svg>
-
+                <li className="text-text-secondary">
                   <a
                     href={`mailto:${personalInfo.email}`}
-                    className="hover:text-primary-accent transition-colors"
+                    className="flex items-center hover:text-primary-accent transition-colors"
                   >
+                    <span className="mr-3 text-primary-accent">
+                      <SocialIcon name="email" />
+                    </span>
                     {personalInfo.email}
                   </a>
                 </li>
-                <li className="flex items-center text-text-secondary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-3 text-primary-accent"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-
+                <li className="text-text-secondary">
                   <a
                     href={personalInfo.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-primary-accent transition-colors"
+                    className="flex items-center hover:text-primary-accent transition-colors"
                   >
+                    <span className="mr-3 text-primary-accent">
+                      <SocialIcon name="github" />
+                    </span>
                     GitHub
+                  </a>
+                </li>
+                <li className="text-text-secondary">
+                  <a
+                    href={personalInfo.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center hover:text-primary-accent transition-colors"
+                  >
+                    <span className="mr-3 text-primary-accent">
+                      <SocialIcon name="linkedin" />
+                    </span>
+                    LinkedIn
                   </a>
                 </li>
               </ul>
@@ -94,7 +91,7 @@ const Contact = () => {
                 <div className="mb-4">
                   <input
                     type="text"
-                    placeholder="Your Name"
+                    placeholder="Yuksel Polat Akbiyik"
                     className="w-full px-4 py-2 rounded bg-secondary-background border border-border text-text-primary focus:outline-none focus:border-primary-accent"
                   />
                 </div>
