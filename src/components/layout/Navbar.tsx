@@ -8,6 +8,7 @@ import { ColorModeToggle, ThemePicker } from "..";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // Navigation items
   const navItems = [
@@ -19,6 +20,22 @@ const Navbar = () => {
     { name: "Interests", target: "interests" },
     { name: "Contact", target: "contact" },
   ];
+
+  // Handle screen resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Initial check
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
@@ -41,27 +58,27 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-50 transition-all duration-300 overflow-hidden ${
         isScrolled
-          ? "bg-primary-background/90 backdrop-blur-md py-3 shadow-lg"
-          : "bg-transparent py-6"
+          ? "bg-primary-background/90 backdrop-blur-md py-2 md:py-3 shadow-lg"
+          : "bg-transparent py-3 md:py-6"
       }`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="w-full max-w-[1400px] px-4 mx-auto flex justify-between items-center">
         <Link
           to="home"
           spy={true}
           smooth={true}
           offset={-70}
           duration={500}
-          className="text-xl font-bold text-primary-accent cursor-pointer"
+          className="text-xl font-bold text-primary-accent cursor-pointer truncate max-w-[150px] sm:max-w-none whitespace-nowrap"
         >
-          {personalInfo.name}
+          {isMobile ? personalInfo.shortName : personalInfo.name}
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center">
-          <div className="flex space-x-8 mr-6">
+          <div className="flex space-x-6 lg:space-x-8 mr-6">
             {navItems.map((item) => (
               <Link
                 key={item.target}
@@ -87,8 +104,8 @@ const Navbar = () => {
 
         {/* Mobile Navigation Toggle */}
         <div className="md:hidden flex items-center">
-          {/* Theme controls for mobile */}
-          <div className="flex items-center space-x-3 mr-4">
+          {/* Theme controls for mobile - more compact */}
+          <div className="flex items-center space-x-2 mr-2">
             <ColorModeToggle />
             <ThemePicker />
           </div>
@@ -141,7 +158,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-secondary-background shadow-lg"
           >
-            <div className="container mx-auto px-4 py-4">
+            <div className="w-full max-w-[1400px] px-4 mx-auto py-4">
               <div className="flex flex-col space-y-4">
                 {navItems.map((item) => (
                   <Link
