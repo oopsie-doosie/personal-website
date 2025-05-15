@@ -8,7 +8,7 @@ import { ColorModeToggle, ThemePicker } from "..";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
 
   // Navigation items
   const navItems = [
@@ -21,20 +21,23 @@ const Navbar = () => {
     { name: "Contact", target: "contact" },
   ];
 
-  // Handle screen resize
+  // Handle screen resize and set initial window width
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+    // Function to update window width
+    const updateWindowDimensions = () => {
+      setWindowWidth(window.innerWidth);
     };
 
-    // Initial check
-    handleResize();
+    // Set initial width (important for SSR)
+    if (typeof window !== "undefined") {
+      updateWindowDimensions();
+    }
 
     // Add event listener
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", updateWindowDimensions);
 
     // Cleanup
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", updateWindowDimensions);
   }, []);
 
   // Handle scroll effect
@@ -56,29 +59,41 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
+  // Determine if on mobile
+  const isMobile = windowWidth > 0 && windowWidth < 768;
+
+  // Use short name on very small screens
+  const displayName =
+    windowWidth < 400 ? personalInfo.shortName : personalInfo.name;
+
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 overflow-hidden ${
+    <header
+      className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-primary-background/90 backdrop-blur-md py-2 md:py-3 shadow-lg"
-          : "bg-transparent py-3 md:py-6"
+          ? "bg-primary-background/90 backdrop-blur-md shadow-lg"
+          : "bg-transparent"
       }`}
+      style={{
+        paddingTop: isScrolled ? "0.5rem" : "0.75rem",
+        paddingBottom: isScrolled ? "0.5rem" : "0.75rem",
+      }}
     >
-      <div className="w-full max-w-[1400px] px-4 mx-auto flex justify-between items-center">
+      <div className="w-full max-w-6xl mx-auto px-4 flex justify-between items-center">
         <Link
           to="home"
           spy={true}
           smooth={true}
           offset={-70}
           duration={500}
-          className="text-xl font-bold text-primary-accent cursor-pointer truncate max-w-[150px] sm:max-w-none whitespace-nowrap"
+          className="text-xl font-bold text-primary-accent cursor-pointer truncate"
+          style={{ maxWidth: isMobile ? "120px" : "none" }}
         >
-          {isMobile ? personalInfo.shortName : personalInfo.name}
+          {displayName}
         </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center">
-          <div className="flex space-x-6 lg:space-x-8 mr-6">
+          <div className="flex space-x-4 lg:space-x-6 mr-4">
             {navItems.map((item) => (
               <Link
                 key={item.target}
@@ -105,19 +120,23 @@ const Navbar = () => {
         {/* Mobile Navigation Toggle */}
         <div className="md:hidden flex items-center">
           {/* Theme controls for mobile - more compact */}
-          <div className="flex items-center space-x-2 mr-2">
+          <div
+            className="flex items-center"
+            style={{ gap: "0.375rem", marginRight: "0.375rem" }}
+          >
             <ColorModeToggle />
             <ThemePicker />
           </div>
 
           <button
-            className="text-text-primary focus:outline-none"
+            className="text-text-primary focus:outline-none ml-1"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
+            style={{ marginLeft: "0.25rem" }}
           >
             {isMobileMenuOpen ? (
               <svg
-                className="h-6 w-6"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -131,7 +150,7 @@ const Navbar = () => {
               </svg>
             ) : (
               <svg
-                className="h-6 w-6"
+                className="h-5 w-5"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -158,7 +177,7 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-secondary-background shadow-lg"
           >
-            <div className="w-full max-w-[1400px] px-4 mx-auto py-4">
+            <div className="w-full max-w-6xl mx-auto px-4 py-4">
               <div className="flex flex-col space-y-4">
                 {navItems.map((item) => (
                   <Link
@@ -180,7 +199,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 };
 
