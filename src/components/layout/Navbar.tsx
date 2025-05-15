@@ -88,7 +88,7 @@ const Navbar = () => {
     windowWidth < 400 ? personalInfo.shortName : personalInfo.name;
 
   return (
-    <header
+    <nav
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-primary-background/90 backdrop-blur-md shadow-lg py-2"
@@ -214,7 +214,7 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </nav>
   );
 };
 
