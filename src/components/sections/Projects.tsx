@@ -1,6 +1,6 @@
 // src/components/sections/Projects/Projects.tsx
 import { motion } from "framer-motion";
-import { projects } from "../../../data";
+import { projects } from "../../data";
 
 const Projects = () => {
   return (

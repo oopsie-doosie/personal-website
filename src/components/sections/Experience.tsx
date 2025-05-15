@@ -1,6 +1,6 @@
 // src/components/sections/Experience/Experience.tsx
 import { motion } from "framer-motion";
-import { experience } from "../../../data";
+import { experience } from "../../data";
 
 const Experience = () => {
   return (

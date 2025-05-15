@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
-import { personalInfo } from "../../../data";
+import { personalInfo } from "../../data";
 import { gsap } from "gsap";
 
 const Hero = () => {

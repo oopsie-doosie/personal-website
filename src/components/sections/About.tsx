@@ -1,6 +1,6 @@
 // src/components/sections/About/About.tsx
 import { motion } from "framer-motion";
-import { personalInfo, education } from "../../../data";
+import { personalInfo, education } from "../../data";
 
 const About = () => {
   return (

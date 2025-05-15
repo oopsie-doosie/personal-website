@@ -1,6 +1,6 @@
 // src/components/sections/Interests/Interests.tsx
 import { motion } from "framer-motion";
-import { interests } from "../../../data";
+import { interests } from "../../data";
 
 const Interests = () => {
   return (

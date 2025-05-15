@@ -1,6 +1,6 @@
 // src/components/sections/Skills/Skills.tsx
 import { motion } from "framer-motion";
-import { skills } from "../../../data";
+import { skills } from "../../data";
 
 const Skills = () => {
   const categories = [
