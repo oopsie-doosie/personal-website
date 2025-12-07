@@ -100,8 +100,8 @@ export default function GlobalBackground3D() {
         {/* Clouds for atmosphere - Only visible at top */}
         {cloudOpacity > 0.01 && (
           <group>
-            <Cloud opacity={cloudOpacity} speed={0.2} width={10} depth={1.5} segments={20} position={[0, 5, -10]} />
-            <Cloud opacity={cloudOpacity} speed={0.2} width={10} depth={1.5} segments={20} position={[0, -5, -10]} />
+            <Cloud opacity={cloudOpacity} speed={0.2} bounds={[10, 2, 1.5]} segments={20} position={[0, 5, -10]} />
+            <Cloud opacity={cloudOpacity} speed={0.2} bounds={[10, 2, 1.5]} segments={20} position={[0, -5, -10]} />
           </group>
         )}
 
