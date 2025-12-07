@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { personalInfo } from "../../data";
+import HeroBackground from "../ui/HeroBackground";
 
 const Hero = () => {
   // Text animation variants
@@ -69,6 +70,8 @@ const Hero = () => {
       id="home"
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
+      <HeroBackground />
+      
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.h1
