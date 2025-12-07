@@ -116,7 +116,7 @@ const Hero = () => {
             smooth={true}
             offset={-70}
             duration={800}
-            className="group relative px-8 py-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-primary-accent/50 transition-all duration-300 overflow-hidden cursor-pointer"
+            className="group relative px-8 py-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-primary-accent/50 transition-all duration-300 overflow-hidden cursor-pointer outline-none focus:outline-none focus:ring-0"
           >
             <span className="relative z-10">Explore My Work</span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>

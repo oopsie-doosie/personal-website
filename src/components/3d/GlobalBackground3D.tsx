@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Environment, Octahedron, Box, Tetrahedron } from '@react-three/drei';
+import { Float, Environment, Cloud } from '@react-three/drei';
 import * as THREE from 'three';
 
 function FloatingShape({ 
@@ -66,6 +66,10 @@ export default function GlobalBackground3D() {
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={0.8} />
         <pointLight position={[-10, -10, -10]} intensity={0.8} />
         
+        {/* Clouds for atmosphere */}
+        <Cloud opacity={0.3} speed={0.2} width={10} depth={1.5} segments={20} position={[0, 5, -10]} />
+        <Cloud opacity={0.3} speed={0.2} width={10} depth={1.5} segments={20} position={[0, -5, -10]} />
+
         {/* Left Side Shapes */}
         <FloatingShape position={[-7, 3, -5]} color="#4f46e5" scale={0.8} type="octahedron" />
         <FloatingShape position={[-8, 0, -6]} color="#0ea5e9" scale={0.6} type="box" />
