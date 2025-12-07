@@ -1,68 +1,18 @@
 // src/components/sections/Hero.tsx
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-scroll";
 import { personalInfo } from "../../data";
-import { gsap } from "gsap";
 
 const Hero = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  // GSAP animation for the background
-  useEffect(() => {
-    if (!heroRef.current) return;
-
-    const particles = heroRef.current.querySelectorAll(".particle");
-
-    particles.forEach((particle) => {
-      gsap.to(particle, {
-        x: `random(-20, 20)`,
-        y: `random(-20, 20)`,
-        duration: `random(3, 5)`,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-    });
-  }, []);
-
-  // Generate particles for the background with theme-aware colors
-  const renderParticles = () => {
-    const particles = [];
-    const opacities = ["10", "20", "30"]; // opacity variants
-    const sizes = ["1", "2", "3"]; // size variants
-
-    for (let i = 0; i < 20; i++) {
-      const opacity = opacities[Math.floor(Math.random() * opacities.length)];
-      const size = sizes[Math.floor(Math.random() * sizes.length)];
-
-      particles.push(
-        <div
-          key={i}
-          className={`particle absolute rounded-full bg-primary-accent opacity-${opacity} w-${size} h-${size}`}
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            backgroundColor: "var(--primary-accent)", // Explicit use of CSS variable for particle color
-            opacity: Number(opacity) / 100,
-            width: `${Number(size) * 0.25}rem`,
-            height: `${Number(size) * 0.25}rem`,
-          }}
-        />
-      );
-    }
-    return particles;
-  };
-
   // Text animation variants
   const titleVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: "easeOut",
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1], // Custom easing for a premium feel
       },
     },
   };
@@ -73,9 +23,9 @@ const Hero = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         delay: 0.2,
-        ease: "easeOut",
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
@@ -86,18 +36,18 @@ const Hero = () => {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
+        duration: 0.8,
         delay: 0.4,
-        ease: "easeOut",
+        ease: [0.22, 1, 0.36, 1],
       },
     },
   };
 
   const buttonVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, scale: 0.9 },
     visible: {
       opacity: 1,
-      y: 0,
+      scale: 1,
       transition: {
         duration: 0.6,
         delay: 0.6,
@@ -106,40 +56,38 @@ const Hero = () => {
     },
     hover: {
       scale: 1.05,
+      boxShadow: "0px 0px 20px rgba(79, 70, 229, 0.4)",
       transition: {
         duration: 0.3,
       },
     },
+    tap: { scale: 0.95 },
   };
 
   return (
     <section
       id="home"
-      ref={heroRef}
       className="min-h-screen flex items-center justify-center relative overflow-hidden"
     >
-      {/* Background with particles and gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary-background via-secondary-background to-primary-background">
-        {renderParticles()}
-      </div>
-
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
         <motion.h1
           variants={titleVariants}
           initial="hidden"
           animate="visible"
-          className="text-5xl md:text-7xl font-bold mb-6"
+          className="text-6xl md:text-8xl font-bold mb-6 tracking-tight"
         >
           <span className="text-text-primary">Hi, I'm </span>
-          <span className="text-primary-accent">{personalInfo.shortName}</span>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-accent to-secondary-accent">
+            {personalInfo.shortName}
+          </span>
         </motion.h1>
 
         <motion.h2
           variants={subtitleVariants}
           initial="hidden"
           animate="visible"
-          className="text-2xl md:text-3xl text-text-secondary mb-8"
+          className="text-3xl md:text-5xl text-text-secondary mb-8 font-light tracking-wide"
         >
           {personalInfo.title}
         </motion.h2>
@@ -148,7 +96,7 @@ const Hero = () => {
           variants={descriptionVariants}
           initial="hidden"
           animate="visible"
-          className="text-lg md:text-xl text-text-tertiary max-w-2xl mx-auto mb-12"
+          className="text-xl md:text-2xl text-text-tertiary max-w-3xl mx-auto mb-12 leading-relaxed"
         >
           Building innovative solutions at Goldman Sachs and developing
           cutting-edge AI analytics tools for hedge funds.
@@ -159,7 +107,8 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
           whileHover="hover"
-          className="inline-block"
+          whileTap="tap"
+          className="flex justify-center"
         >
           <Link
             to="about"
@@ -167,9 +116,10 @@ const Hero = () => {
             smooth={true}
             offset={-70}
             duration={800}
-            className="btn bg-primary-accent hover:bg-secondary-accent text-text-primary border-none px-8 py-3 rounded-md cursor-pointer inline-block transition-colors"
+            className="group relative px-8 py-4 bg-gradient-to-r from-primary-accent to-secondary-accent text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-primary-accent/50 transition-all duration-300 overflow-hidden cursor-pointer outline-none focus:outline-none focus:ring-0"
           >
-            Learn More
+            <span className="relative z-10">Explore My Work</span>
+            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"></div>
           </Link>
         </motion.div>
       </div>

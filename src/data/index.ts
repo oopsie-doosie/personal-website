@@ -63,7 +63,7 @@ export const projects = [
       "Engineered scalable pipeline processing 1M+ daily data points with sharded architecture.",
       "Achieved 60x reduction in API latency (40s to <1s) using multi-layered caching and materialized views.",
       "Built distributed social sentiment pipeline with LLM-based analysis for crypto signals.",
-      "Established CI/CD pipelines and DevOps strategy using Netlify and Cloudflare.",
+      "Established CI/CD pipelines and DevOps strategy using Github and Cloudflare.",
     ],
     technologies: [
       "React",

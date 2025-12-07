@@ -13,6 +13,8 @@ import {
   Contact,
 } from "@/components/index";
 
+import GlobalBackground3D from "@/components/3d/GlobalBackground3D";
+
 function App() {
   // Add smooth scrolling effect
   useEffect(() => {
@@ -20,7 +22,8 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-primary-background text-text-primary">
+    <div className="min-h-screen bg-primary-background text-text-primary relative">
+      <GlobalBackground3D />
       <Navbar />
       <main>
         <Hero />
