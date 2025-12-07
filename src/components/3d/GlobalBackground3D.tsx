@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Environment, Cloud } from '@react-three/drei';
 import * as THREE from 'three';
@@ -59,16 +59,51 @@ function FloatingShape({
 }
 
 export default function GlobalBackground3D() {
+  const [isDark, setIsDark] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
+
+  // Theme detection
+  useEffect(() => {
+    const checkTheme = () => {
+      const colorMode = document.documentElement.getAttribute('data-color-mode');
+      // Check data-color-mode attribute which is set by ThemeContext
+      setIsDark(colorMode === 'dark');
+    };
+    
+    checkTheme();
+    
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-color-mode'] });
+    
+    return () => observer.disconnect();
+  }, []);
+
+  // Scroll detection for clouds
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  if (!isDark) return null;
+
+  // Calculate cloud opacity based on scroll (fade out over first 500px)
+  const cloudOpacity = Math.max(0, 0.3 - scrollY / 500);
+
   return (
-    <div className="fixed inset-0 z-0 w-full h-full pointer-events-none">
+    <div className="fixed inset-0 z-50 w-full h-full pointer-events-none">
       <Canvas camera={{ position: [0, 0, 10], fov: 40 }} style={{ width: '100%', height: '100%' }}>
         <ambientLight intensity={0.4} />
         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={0.8} />
         <pointLight position={[-10, -10, -10]} intensity={0.8} />
         
-        {/* Clouds for atmosphere */}
-        <Cloud opacity={0.3} speed={0.2} width={10} depth={1.5} segments={20} position={[0, 5, -10]} />
-        <Cloud opacity={0.3} speed={0.2} width={10} depth={1.5} segments={20} position={[0, -5, -10]} />
+        {/* Clouds for atmosphere - Only visible at top */}
+        {cloudOpacity > 0.01 && (
+          <group>
+            <Cloud opacity={cloudOpacity} speed={0.2} width={10} depth={1.5} segments={20} position={[0, 5, -10]} />
+            <Cloud opacity={cloudOpacity} speed={0.2} width={10} depth={1.5} segments={20} position={[0, -5, -10]} />
+          </group>
+        )}
 
         {/* Left Side Shapes */}
         <FloatingShape position={[-7, 3, -5]} color="#4f46e5" scale={0.8} type="octahedron" />
