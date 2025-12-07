@@ -4,6 +4,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["Outfit", "sans-serif"],
+      },
       colors: {
         // Semantic color naming that will update based on theme
         primary: {

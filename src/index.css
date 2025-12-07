@@ -1,16 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  /* Light Theme */
+  --primary-background: #ffffff;
+  --secondary-background: #f8fafc;
+  --primary-accent: #4f46e5; /* Indigo 600 */
+  --secondary-accent: #06b6d4; /* Cyan 500 */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --border-color: #e2e8f0;
+  --card-background: rgba(255, 255, 255, 0.8);
+  --gradient-start: #4f46e5;
+  --gradient-end: #06b6d4;
+}
+
+[data-theme="dark"] {
+  /* Dark Theme */
+  --primary-background: #020617; /* Slate 950 */
+  --secondary-background: #0f172a; /* Slate 900 */
+  --primary-accent: #818cf8; /* Indigo 400 */
+  --secondary-accent: #22d3ee; /* Cyan 400 */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --border-color: #1e293b;
+  --card-background: rgba(15, 23, 42, 0.6);
+  --gradient-start: #6366f1;
+  --gradient-end: #06b6d4;
+}
 
 /* Global styles that use theme variables */
 body {
   background-color: var(--primary-background);
   color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Adding some transition effects for smooth theme changes */
+/* Glassmorphism utilities */
+.glass {
+  background: var(--card-background);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+}
+
 * {
-  transition-property: color, background-color, border-color;
+  transition-property: color, background-color, border-color, transform, opacity, box-shadow;
   transition-duration: 200ms;
   transition-timing-function: ease-in-out;
 }

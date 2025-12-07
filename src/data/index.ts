@@ -28,41 +28,52 @@ export const education = [
 
 export const experience = [
   {
-    position: "Full Stack Developer",
+    position: "Software Engineer",
     company: "Goldman Sachs",
-    duration: "2022 - Present",
+    duration: "September 2022 - Present",
     description:
-      "Developing high-performance financial software solutions and analytics tools that process large-scale data sets, with a focus on improving efficiency and productivity.",
+      "Developing high-performance financial software solutions and analytics tools that process large-scale data sets.",
     responsibilities: [
-      "Designed and implemented both frontend and backend components for financial applications",
-      "Automated regular tasks, reducing processing time from 25 minutes to under 2 minutes",
-      "Managed and mentored an intern, providing guidance throughout their project lifecycle",
-      "Serving on the New Joiners Committee to improve onboarding experience",
-      "Collaborated with stakeholders to deliver end-to-end solutions",
+      "Designed and implemented core components of the v2 reporting engine (25+ tables) to drive the rendering of 200k+ daily reports.",
+      "Identified a critical workflow bottleneck and engineered a parsing engine using Apache PDFBox, reducing processing time by 98% (10m to <10s).",
+      "Engineered a self-service migration platform with a React UI, reducing operation time by 90% and enabling safe, one-click deployments.",
+      "Developed reusable internal Java libraries adopted by 3+ teams, reducing boilerplate code by standardizing error handling.",
+      "Led a legacy codebase modernization effort, removing 400+ unused files and increasing test coverage from 3% to 60%.",
+    ],
+  },
+  {
+    position: "Software Engineering Intern",
+    company: "Appreciate",
+    duration: "March 2022 - June 2022",
+    description: "Optimized backend endpoints and built image filtering services.",
+    responsibilities: [
+      "Optimized Python (Flask) endpoints by implementing a tiered Redis caching strategy, reducing P99 latency by 70%.",
+      "Built high-performance image filtering services on Google Cloud Platform (GCP), achieving >80% accuracy in automated content moderation.",
     ],
   },
 ];
 
 export const projects = [
   {
-    title: "Crypto Insights: Analytics Platform for Digital Assets",
+    title: "Hermes Labs",
     description:
-      "An analytics tool targeting hedge funds that provides deep insights into market data and trading patterns.",
+      "A high-performance crypto analytics dashboard providing deep insights into market data and trading patterns.",
     highlights: [
-      "Multiple funds have expressed interest",
-      "Potential 7-figure valuation",
-      "Combines AI and financial expertise",
-      "Pattern recognition and anomaly detection",
-      "Real-time integration of on-chain metrics and macro economic signals.",
+      "Architected end-to-end stack using Python (FastAPI), React/Vite, and PostgreSQL/Supabase.",
+      "Engineered scalable pipeline processing 1M+ daily data points with sharded architecture.",
+      "Achieved 60x reduction in API latency (40s to <1s) using multi-layered caching and materialized views.",
+      "Built distributed social sentiment pipeline with LLM-based analysis for crypto signals.",
+      "Established CI/CD pipelines and DevOps strategy using Netlify and Cloudflare.",
     ],
     technologies: [
       "React",
       "TypeScript",
       "Python",
       "FastAPI",
-      "InfluxDB",
-      "Docker",
+      "PostgreSQL",
       "Redis",
+      "Docker",
+      "Railway",
     ],
   },
   {
@@ -151,17 +162,17 @@ export const interests = [
   {
     name: "Pickleball",
     description: "Recently discovered and enjoying this fast-growing sport.",
-    icon: "ping-pong",
+    icon: "pickleball",
   },
   {
     name: "Hiking",
     description: "Exploring nature trails and enjoying the outdoors.",
-    icon: "mountain",
+    icon: "hiking",
   },
   {
     name: "Reading",
     description: "Avid reader of non-fiction books on technology and business.",
-    icon: "book-open",
+    icon: "reading",
   },
   {
     name: "Crypto",
@@ -174,5 +185,20 @@ export const interests = [
     description:
       "Optimizing finances and working toward FIRE while still enjoying life.",
     icon: "finance",
+  },
+  {
+    name: "Formula 1",
+    description: "Passionate follower of F1 racing, strategy, and engineering.",
+    icon: "f1",
+  },
+  {
+    name: "Snowboarding",
+    description: "Chasing powder and enjoying the mountains in winter.",
+    icon: "snowboarding",
+  },
+  {
+    name: "Cocktail Making",
+    description: "Experimenting with mixology and creating craft cocktails.",
+    icon: "cocktails",
   },
 ];

@@ -8,7 +8,6 @@ import { ColorModeToggle, ThemePicker } from "..";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(true); // Start with scrolled state
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(0);
   const initialRenderRef = useRef(true);
 
   // Navigation items
@@ -21,25 +20,6 @@ const Navbar = () => {
     { name: "Interests", target: "interests" },
     { name: "Contact", target: "contact" },
   ];
-
-  // Handle screen resize and set initial window width
-  useEffect(() => {
-    // Function to update window width
-    const updateWindowDimensions = () => {
-      setWindowWidth(window.innerWidth);
-    };
-
-    // Set initial width
-    if (typeof window !== "undefined") {
-      updateWindowDimensions();
-    }
-
-    // Add event listener
-    window.addEventListener("resize", updateWindowDimensions);
-
-    // Cleanup
-    return () => window.removeEventListener("resize", updateWindowDimensions);
-  }, []);
 
   // One-time initialization effect to set correct scroll state
   useEffect(() => {
@@ -80,10 +60,6 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   };
 
-  // Use short name on very small screens
-  const displayName =
-    windowWidth < 400 ? personalInfo.shortName : personalInfo.name;
-
   return (
     <nav
       className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${
@@ -101,7 +77,8 @@ const Navbar = () => {
           duration={500}
           className="text-xl font-bold text-primary-accent cursor-pointer truncate max-w-[150px] sm:max-w-none"
         >
-          {displayName}
+          <span className="md:hidden">{personalInfo.shortName}</span>
+          <span className="hidden md:inline">{personalInfo.name}</span>
         </Link>
 
         {/* Desktop Navigation */}

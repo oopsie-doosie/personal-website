@@ -1,173 +1,57 @@
 // src/utils/interestIcons.tsx
 import React from "react";
+import {
+  Flower2,
+  Waves,
+  Trophy,
+  Activity,
+  Mountain,
+  BookOpen,
+  Bitcoin,
+  TrendingUp,
+  Car,
+  HelpCircle,
+  Snowflake,
+  Martini,
+} from "lucide-react";
 
 /**
- * Returns an SVG icon based on the provided icon name
- * Used to display interest icons in the Interests section
+ * Returns a Lucide icon component based on the provided icon name
  */
-export const getInterestIcon = (iconName: string): React.ReactNode => {
+export const getInterestIcon = (iconName: string) => {
+  const props = { className: "w-6 h-6" };
+
   switch (iconName) {
     case "yoga":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <path d="M12 2a4 4 0 0 1 4 4c0 1.7-1.4 3.2-2 4-.6.8-1 1.9-1 3 0 1.1.6 2 1 3 .6.8 2 2.3 2 4a4 4 0 0 1-8 0c0-1.7 1.4-3.2 2-4 .6-.8 1-1.9 1-3 0-1.1-.6-2-1-3-.6-.8-2-2.3-2-4a4 4 0 0 1 4-4Z" />
-        </svg>
-      );
+      return <Flower2 {...props} />;
     case "swimming":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <path d="M2 12h1a7 7 0 0 1 6 3.5 7 7 0 0 0 6 3.5h1" />
-          <path d="M22 12h-1a7 7 0 0 0-6-3.5 7 7 0 0 1-6-3.5H8" />
-          <path d="m6 15 2 2" />
-          <path d="m15 15 2 2" />
-          <path d="M9 13v-3h6v3" />
-        </svg>
-      );
+      return <Waves {...props} />;
     case "tennis":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M16 12a4 4 0 0 1-8 0" />
-          <path d="M12 15a4 4 0 0 1 0-8" />
-          <path d="M12 8a4 4 0 0 0-4 4" />
-          <path d="M12 16a4 4 0 0 0 4-4" />
-        </svg>
-      );
-    case "ping-pong":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <path d="M9 17a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-          <path d="M13 14h5a3 3 0 0 0 3-3 2 2 0 0 0-2-2h-6" />
-          <path d="M13 14v6" />
-          <path d="m3 9 5 1" />
-          <path d="M13 5v3" />
-        </svg>
-      );
-    case "mountain":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <path d="m8 3 4 8 5-5 5 15H2L8 3z" />
-        </svg>
-      );
-    case "book-open":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-        </svg>
-      );
+      return <Activity {...props} />; // Or Trophy
+    case "pickleball":
+      return <Trophy {...props} />;
+    case "hiking":
+      return <Mountain {...props} />;
+    case "reading":
+      return <BookOpen {...props} />;
     case "crypto":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-3.94-.694m5.155-6.2L8.29 4.26m5.908 1.042.348-1.97" />
-        </svg>
-      );
+      return <Bitcoin {...props} />;
     case "finance":
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h6" />
-          <rect x="15" y="3" width="6" height="6" rx="1" />
-          <path d="m10 7-3 3" />
-          <path d="M2 17h2" />
-          <path d="M9 17H7" />
-        </svg>
-      );
+      return <TrendingUp {...props} />;
+    case "f1":
+      return <Car {...props} />;
+    case "snowboarding":
+      return <Snowflake {...props} />;
+    case "cocktails":
+      return <Martini {...props} />;
     default:
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="w-6 h-6"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 16v-4" />
-          <path d="M12 8h.01" />
-        </svg>
-      );
+      return <HelpCircle {...props} />;
   }
 };
 
-// Optionally: Create a component wrapper for the icons if needed
 export const InterestIcon: React.FC<{ name: string }> = ({ name }) => {
   return (
-    <div className="bg-primary-accent/20 p-3 rounded-full text-primary-accent">
+    <div className="bg-primary-accent/20 p-3 rounded-full text-primary-accent transition-transform hover:scale-110 duration-300">
       {getInterestIcon(name)}
     </div>
   );
