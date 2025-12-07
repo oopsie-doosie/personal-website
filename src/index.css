@@ -5,33 +5,33 @@
 @tailwind utilities;
 
 :root {
-  /* Light Theme */
+  /* Light Theme - Crisp & Clean */
   --primary-background: #ffffff;
-  --secondary-background: #f8fafc;
+  --secondary-background: #f1f5f9;
   --primary-accent: #4f46e5; /* Indigo 600 */
-  --secondary-accent: #06b6d4; /* Cyan 500 */
+  --secondary-accent: #0ea5e9; /* Sky 500 */
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-tertiary: #94a3b8;
   --border-color: #e2e8f0;
-  --card-background: rgba(255, 255, 255, 0.8);
+  --card-background: rgba(255, 255, 255, 0.65);
   --gradient-start: #4f46e5;
-  --gradient-end: #06b6d4;
+  --gradient-end: #0ea5e9;
 }
 
 [data-theme="dark"] {
-  /* Dark Theme */
-  --primary-background: #020617; /* Slate 950 */
-  --secondary-background: #0f172a; /* Slate 900 */
-  --primary-accent: #818cf8; /* Indigo 400 */
-  --secondary-accent: #22d3ee; /* Cyan 400 */
+  /* Dark Theme - Deep & Premium */
+  --primary-background: #000000; /* Pure Black for OLED pop */
+  --secondary-background: #0a0a0a; /* Almost Black */
+  --primary-accent: #6366f1; /* Indigo 500 */
+  --secondary-accent: #38bdf8; /* Sky 400 */
   --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
+  --text-secondary: #cbd5e1;
   --text-tertiary: #64748b;
   --border-color: #1e293b;
-  --card-background: rgba(15, 23, 42, 0.6);
+  --card-background: rgba(10, 10, 10, 0.6);
   --gradient-start: #6366f1;
-  --gradient-end: #06b6d4;
+  --gradient-end: #38bdf8;
 }
 
 /* Global styles that use theme variables */
