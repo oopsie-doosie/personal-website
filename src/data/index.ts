@@ -45,7 +45,8 @@ export const experience = [
     position: "Software Engineering Intern",
     company: "Appreciate",
     duration: "March 2022 - June 2022",
-    description: "Optimized backend endpoints and built image filtering services.",
+    description:
+      "Optimized backend endpoints and built image filtering services.",
     responsibilities: [
       "Optimized Python (Flask) endpoints by implementing a tiered Redis caching strategy, reducing P99 latency by 70%.",
       "Built high-performance image filtering services on Google Cloud Platform (GCP), achieving >80% accuracy in automated content moderation.",
@@ -54,28 +55,6 @@ export const experience = [
 ];
 
 export const projects = [
-  {
-    title: "Hermes Labs",
-    description:
-      "A high-performance crypto analytics dashboard providing deep insights into market data and trading patterns.",
-    highlights: [
-      "Architected end-to-end stack using Python (FastAPI), React/Vite, and PostgreSQL/Supabase.",
-      "Engineered scalable pipeline processing 1M+ daily data points with sharded architecture.",
-      "Achieved 60x reduction in API latency (40s to <1s) using multi-layered caching and materialized views.",
-      "Built distributed social sentiment pipeline with LLM-based analysis for crypto signals.",
-      "Established CI/CD pipelines and DevOps strategy using Github and Cloudflare.",
-    ],
-    technologies: [
-      "React",
-      "TypeScript",
-      "Python",
-      "FastAPI",
-      "PostgreSQL",
-      "Redis",
-      "Docker",
-      "Railway",
-    ],
-  },
   {
     title: "Personal Anonymous Blog",
     description:
