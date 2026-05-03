@@ -7,7 +7,7 @@ export const personalInfo = {
   email: "ypolat99yupa@gmail.com",
   github: "https://github.com/oopsie-doosie/",
   linkedin: "https://www.linkedin.com/in/ypolat99/",
-  bio: "UCLA graduate with dual degrees in Computer Science and Economics, currently working at Goldman Sachs and developing innovative AI solutions.",
+  bio: "UCLA graduate with dual degrees in Computer Science and Economics, currently building ArbWick and developing innovative AI solutions.",
 };
 
 export const education = [
@@ -28,9 +28,23 @@ export const education = [
 
 export const experience = [
   {
+    position: "Co-Founder & CTO",
+    company: "ArbWick",
+    duration: "April 2026 to Present",
+    description:
+      "Building an advanced AI agent framework and data analytics platform for market intelligence to automate financial workflows.",
+    responsibilities: [
+      "Architected a highly scalable AI agent framework utilizing FastAPI and multiple LLM providers to autonomously execute context aware tasks and interact with production databases.",
+      "Engineered an idempotent incremental data ingestion pipeline that synchronizes millions of data points daily while significantly optimizing database load times and API rate limits.",
+      "Developed a dynamic responsive frontend dashboard leveraging React and Zustand to support complex multi metric data visualizations and interactive drag and drop grid layouts.",
+      "Built a comprehensive real time Skills Library and metric catalog utilizing advanced caching layers and materialized database views to guarantee sub ten millisecond query latencies.",
+      "Led cross-functional product design, day-to-day operations, and technical strategy in close collaboration with the non-technical co-founder to align engineering with business goals."
+    ],
+  },
+  {
     position: "Software Engineer",
     company: "Goldman Sachs",
-    duration: "September 2022 - Present",
+    duration: "September 2022 to April 2026",
     description:
       "Developing high-performance financial software solutions and analytics tools that process large-scale data sets.",
     responsibilities: [
@@ -38,7 +52,7 @@ export const experience = [
       "Identified a critical workflow bottleneck and engineered a parsing engine using Apache PDFBox, reducing processing time by 98% (10m to <10s).",
       "Engineered a self-service migration platform with a React UI, reducing operation time by 90% and enabling safe, one-click deployments.",
       "Developed reusable internal Java libraries adopted by 3+ teams, reducing boilerplate code by standardizing error handling.",
-      "Led a legacy codebase modernization effort, removing 400+ unused files and increasing test coverage from 3% to 60%.",
+      "Led a legacy codebase modernization effort, removing 400+ unused files and increasing test coverage from 3% to 60%."
     ],
   },
   {
@@ -49,7 +63,7 @@ export const experience = [
       "Optimized backend endpoints and built image filtering services.",
     responsibilities: [
       "Optimized Python (Flask) endpoints by implementing a tiered Redis caching strategy, reducing P99 latency by 70%.",
-      "Built high-performance image filtering services on Google Cloud Platform (GCP), achieving >80% accuracy in automated content moderation.",
+      "Built a high-performance image filtering services on Google Cloud Platform (GCP), achieving >80% accuracy in automated content moderation."
     ],
   },
 ];
