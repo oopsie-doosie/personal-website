@@ -16,7 +16,7 @@ export const education = [
     institution: "University of California, Los Angeles (UCLA)",
     duration: "2018 - 2022",
     description:
-      "Focused on ML, AI, Data Sciene and software engineering principles. Developed a strong foundation in algorithms, data structures.",
+      "Focused on ML, AI, Data Science and software engineering principles. Developed a strong foundation in algorithms and data structures.",
   },
   {
     degree: "Bachelor of Arts in Economics",
@@ -30,7 +30,7 @@ export const experience = [
   {
     position: "Co-Founder & CTO",
     company: "ArbWick",
-    duration: "April 2026 to Present",
+    duration: "April 2026 - Present",
     description:
       "Building an advanced AI agent framework and data analytics platform for market intelligence to automate financial workflows.",
     responsibilities: [
@@ -44,7 +44,7 @@ export const experience = [
   {
     position: "Software Engineer",
     company: "Goldman Sachs",
-    duration: "September 2022 to April 2026",
+    duration: "September 2022 - April 2026",
     description:
       "Developing high-performance financial software solutions and analytics tools that process large-scale data sets.",
     responsibilities: [
@@ -70,6 +70,28 @@ export const experience = [
 
 export const projects = [
   {
+    title: "Real-Time Market Signal Engine",
+    description:
+      "A sub-second signal generation engine that processes live financial streams for autonomous trading.",
+    highlights: [
+      "Built an asynchronous Python engine to ingest live data and continuously evaluate complex user conditions like price thresholds and ratio triggers.",
+      "Optimized evaluation using O(1) in-memory lookups to process hundreds of concurrent rules with sub-millisecond latency.",
+      "Designed an extensible architecture where the alert layer can be seamlessly swapped for direct automated order execution."
+    ],
+    technologies: ["Python", "Asyncio", "WebSockets"],
+  },
+  {
+    title: "Dynamic Dashboard Engine",
+    description:
+      "A modular, responsive dashboard building platform for complex multi-metric data visualization.",
+    highlights: [
+      "Implemented a flexible React-based widget system with drag and drop grid layouts and Zustand for seamless state synchronization.",
+      "Utilized Recharts and lightweight-charts for performant rendering of complex multi-metric time series data across dual Y-axes.",
+      "Integrated an AI assistant to enable natural language generation of fully formed, interactive dashboards."
+    ],
+    technologies: ["React", "Zustand", "TypeScript", "Tailwind CSS"],
+  },
+  {
     title: "Personal Anonymous Blog",
     description:
       "A detailed personal blog with a focus on technical topics and industry insights.",
@@ -91,47 +113,47 @@ export interface Skill {
 export const skills = {
   languages: [
     { name: "TypeScript", isBold: true },
-    { name: "JavaScript", isBold: true },
     { name: "Python", isBold: true },
-    { name: "R", isBold: false },
+    { name: "JavaScript", isBold: true },
+    { name: "SQL", isBold: true },
     { name: "Java", isBold: false },
     { name: "C++", isBold: false },
   ],
   frontend: [
     { name: "React", isBold: true },
-    { name: "Angular", isBold: true },
-    { name: "HTML", isBold: true },
-    { name: "Tailwind CSS", isBold: false },
-    { name: "CSS", isBold: false },
-    { name: "Framer Motion", isBold: false },
+    { name: "Zustand", isBold: true },
+    { name: "Tailwind CSS", isBold: true },
+    { name: "Framer Motion", isBold: true },
+    { name: "Angular", isBold: false },
+    { name: "HTML/CSS", isBold: false },
   ],
   backend: [
-    { name: "Spring Boot", isBold: true },
     { name: "FastAPI", isBold: true },
+    { name: "Asyncio", isBold: true },
+    { name: "Spring Boot", isBold: true },
     { name: "Node.js", isBold: false },
     { name: "Express", isBold: false },
-    { name: "Flask", isBold: false },
   ],
   databases: [
     { name: "PostgreSQL", isBold: true },
+    { name: "TimescaleDB", isBold: true },
+    { name: "Redis", isBold: true },
+    { name: "InfluxDB", isBold: false },
     { name: "MySQL", isBold: false },
-    { name: "InfluxDB", isBold: true },
-    { name: "DB2", isBold: false },
-    { name: "Sybase IQ", isBold: false },
   ],
   deployment: [
+    { name: "Docker", isBold: true },
     { name: "Vercel", isBold: true },
-    { name: "Netlify", isBold: true },
-    { name: "Railway", isBold: false },
-    { name: "Render", isBold: false },
-    { name: "Git", isBold: true },
-    { name: "Docker", isBold: false },
+    { name: "Cloudflare", isBold: true },
     { name: "AWS", isBold: false },
+    { name: "Git", isBold: true },
+    { name: "Railway", isBold: false },
   ],
   other: [
-    { name: "Machine Learning", isBold: false },
-    { name: "Data Analysis", isBold: true },
+    { name: "AI Agent Frameworks", isBold: true },
+    { name: "Data Engineering", isBold: true },
     { name: "Financial Modeling", isBold: true },
+    { name: "WebSockets", isBold: true },
   ],
 };
 
