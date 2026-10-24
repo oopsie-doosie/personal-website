@@ -1,18 +1,8 @@
 // src/components/sections/Skills.tsx
 import { motion } from "framer-motion";
-import { skills } from "@/data";
+import { skills, skillCategories as categories } from "@/data";
 
 const Skills = () => {
-  // Updated categories to include deployment
-  const categories = [
-    { key: "languages", title: "Programming Languages" },
-    { key: "frontend", title: "Frontend Technologies" },
-    { key: "backend", title: "Backend Technologies" },
-    { key: "databases", title: "Databases" },
-    { key: "deployment", title: "Deployment & DevOps" },
-    { key: "other", title: "Other Skills" },
-  ];
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

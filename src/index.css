@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
-
+/* Outfit font is loaded from index.html so it doesn't block rendering */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
