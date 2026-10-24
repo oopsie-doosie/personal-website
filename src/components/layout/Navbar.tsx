@@ -1,14 +1,15 @@
 // src/components/layout/Navbar.tsx
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import { motion, AnimatePresence } from "framer-motion";
 import { personalInfo } from "../../data";
 import { ColorModeToggle, ThemePicker } from "..";
 
 const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(true); // Start with scrolled state
+  // Start in the top-of-page state to match the prerendered HTML, so the
+  // navbar doesn't change size on load
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const initialRenderRef = useRef(true);
 
   // Navigation items
   const navItems = [
@@ -21,37 +22,15 @@ const Navbar = () => {
     { name: "Contact", target: "contact" },
   ];
 
-  // One-time initialization effect to set correct scroll state
-  useEffect(() => {
-    if (initialRenderRef.current) {
-      // Force compact navbar on first render
-      setIsScrolled(true);
-
-      // After a very short delay, check actual scroll position
-      const timer = setTimeout(() => {
-        if (window.scrollY <= 50) {
-          setIsScrolled(false);
-        }
-        initialRenderRef.current = false;
-      }, 100);
-
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
-  // Handle scroll effect (after initial render)
+  // Handle scroll effect; the initial check covers reloads where the browser
+  // restores a scrolled position
   useEffect(() => {
     const handleScroll = () => {
-      if (initialRenderRef.current) return;
-
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 50);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
