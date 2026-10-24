@@ -1,6 +1,6 @@
 // scripts/prerender.js
 // Runs after `vite build` and `vite build --ssr`: renders the app into
-// dist/index.html, preloads the above-the-fold fonts, injects JSON-LD
+// dist/index.html, inlines CSS, preloads the above-the-fold fonts, injects JSON-LD
 // structured data, and writes dist/llms.txt.
 import fs from "node:fs";
 import path from "node:path";
@@ -40,11 +40,24 @@ const fontPreloads = fontPatterns
 const jsonLd = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 
 let html = fs.readFileSync(indexPath, "utf-8");
-html = replaceOnce(html, '<div id="root"></div>', `<div id="root">${render()}</div>`);
+// This single-page site has a small stylesheet. Inline it to avoid a blocking
+// network round trip, keeping Vite's absolute /assets/ font URLs intact.
+const stylesheet = html.match(/<link rel="stylesheet" href="\/assets\/([^"/]+\.css)">/);
+if (!stylesheet) throw new Error("prerender: expected Vite's stylesheet link");
+const css = fs.readFileSync(path.join(root, "dist/assets", stylesheet[1]), "utf-8");
+html = replaceOnce(html, stylesheet[0], `${fontPreloads}\n    <style>${css}</style>`);
+
+// Keep Cloudflare from rewriting our public email links and injecting its
+// decoder. Put the opt-out comments outside React's hydration root.
+html = replaceOnce(
+  html,
+  '<div id="root"></div>',
+  `<!--email_off--><div id="root">${render()}</div><!--/email_off-->`
+);
 html = replaceOnce(
   html,
   "</head>",
-  `  ${fontPreloads}\n    <script type="application/ld+json">${jsonLd}</script>\n  </head>`
+  `  <script type="application/ld+json">${jsonLd}</script>\n  </head>`
 );
 
 fs.writeFileSync(indexPath, html);
