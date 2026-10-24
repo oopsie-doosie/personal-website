@@ -1,17 +1,17 @@
 // src/main.tsx
 import { StrictMode } from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
+// Self-hosted fonts (preloaded by scripts/prerender.js)
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
+import "@fontsource/instrument-serif/400-italic.css";
 import "./index.css";
-import "./styles/themes.css"; // Import our theme variables
 import App from "./App.tsx";
-import { ThemeProvider } from "./context/ThemeContext"; // Import our ThemeProvider
 
 const container = document.getElementById("root")!;
 const app = (
   <StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <App />
   </StrictMode>
 );
 

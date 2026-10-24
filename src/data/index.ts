@@ -1,229 +1,248 @@
 // src/data/index.ts
+// All site content lives here. The page, the JSON-LD structured data and
+// llms.txt are all generated from these values (see src/seo.ts).
 
 export const personalInfo = {
   name: "Yuksel Polat Akbiyik",
   shortName: "Polat",
-  title: "Software Engineer | Crypto Enthusiast | Personal Finance Advocate",
+  role: "Co-Founder & CTO",
+  company: "Arbwick",
+  location: "Los Angeles, CA",
   email: "ypolat99yupa@gmail.com",
   github: "https://github.com/oopsie-doosie/",
   linkedin: "https://www.linkedin.com/in/ypolat99/",
   website: "https://www.ypolat.com",
-  bio: "UCLA graduate with dual degrees in Computer Science and Economics, currently building ArbWick and developing innovative AI solutions.",
+  summary:
+    "Software engineer with 4 years in regulated finance, 3.5 at Goldman Sachs and now sole technical founder of an AI research platform for institutional investors. Ships agentic workflows end to end, from scoping ambiguous problems with customers to building the tool, evaluation, and audit layers that make them production ready.",
+  intro:
+    "I'm the co-founder & CTO of Arbwick, an AI research platform for institutional investors, after 3.5 years as a software engineer at Goldman Sachs. I ship agentic workflows end to end, from scoping ambiguous problems with customers to the tool, evaluation, and audit layers that make them production ready.",
 };
 
-export const education = [
-  {
-    degree: "Bachelor of Science in Computer Science",
-    institution: "University of California, Los Angeles (UCLA)",
-    duration: "2018 - 2022",
-    description:
-      "Focused on ML, AI, Data Science and software engineering principles. Developed a strong foundation in algorithms and data structures.",
-  },
-  {
-    degree: "Bachelor of Arts in Economics",
-    institution: "University of California, Los Angeles (UCLA)",
-    duration: "2018 - 2022",
-    description: "Specialized in econometrics and quantitative analysis",
-  },
+// Shown in the hero's "whoami" terminal
+export const facts = [
+  { label: "name", value: "Yuksel Polat Akbiyik" },
+  { label: "goes by", value: "Polat" },
+  { label: "based in", value: "Los Angeles, CA" },
+  { label: "now", value: "Co-Founder & CTO, Arbwick" },
+  { label: "before", value: "Software Engineer, Goldman Sachs" },
+  { label: "studied", value: "CS + Economics, UCLA" },
+  { label: "builds", value: "AI agents for institutional finance" },
+  { label: "codes in", value: "Python · TypeScript · SQL" },
+  { label: "off hours", value: "tennis · snowboarding · F1" },
 ];
 
-export const experience = [
+export const stats = [
+  { value: "4", unit: "yrs", label: "in regulated finance" },
+  { value: "300", unit: "+", label: "agent functions, loaded on demand" },
+  { value: "130", unit: "M", label: "rows of market data from 17 vendors" },
+  { value: "200", unit: "k+", label: "client reports a day at Goldman Sachs" },
+];
+
+export interface Highlight {
+  icon: string;
+  title: string;
+  text: string;
+  metric?: string;
+  metricLabel?: string;
+  // Arbwick bento layout: 2 = wide card, 3 = full-width card on desktop
+  span?: 2 | 3;
+  // Small diagram shown on wide cards
+  visual?: "stack" | "pipeline" | "reference";
+}
+
+export const experience: {
+  company: string;
+  monogram: string;
+  role: string;
+  period: string;
+  summary: string;
+  // Optional intro shown next to the animated agent-run terminal
+  showcase?: { title: string; text: string };
+  highlights: Highlight[];
+}[] = [
   {
-    position: "Co-Founder & CTO",
-    company: "ArbWick",
-    duration: "April 2026 - Present",
-    description:
-      "Building an advanced AI agent framework and data analytics platform for market intelligence to automate financial workflows.",
-    responsibilities: [
-      "Architected a highly scalable AI agent framework utilizing FastAPI and multiple LLM providers to autonomously execute context aware tasks and interact with production databases.",
-      "Engineered an idempotent incremental data ingestion pipeline that synchronizes millions of data points daily while significantly optimizing database load times and API rate limits.",
-      "Developed a dynamic responsive frontend dashboard leveraging React and Zustand to support complex multi metric data visualizations and interactive drag and drop grid layouts.",
-      "Built a comprehensive real time Skills Library and metric catalog utilizing advanced caching layers and materialized database views to guarantee sub ten millisecond query latencies.",
-      "Led cross-functional product design, day-to-day operations, and technical strategy in close collaboration with the non-technical co-founder to align engineering with business goals."
+    company: "Arbwick",
+    monogram: "Aw",
+    role: "Co-Founder & CTO",
+    period: "Apr 2026 — Present",
+    summary: "AI research platform for institutional investors",
+    showcase: {
+      title: "A thesis in, a defensible report out",
+      text: "Describe an investment idea in plain English. The agent plans the analyses, loads only the tools it needs, runs independent branches in parallel against live market data, and returns a backtested report where every figure traces back to the query that produced it.",
+    },
+    highlights: [
+      {
+        icon: "boxes",
+        title: "The whole product, built solo",
+        text: "Sole engineer on the entire product: FastAPI backend, React/TypeScript SPA, 40+ pipelines ingesting 17 data vendors into a 130M-row time-series store, plus multi-tenant access control, usage-based billing, and production monitoring.",
+        metric: "130M rows · 17 vendors",
+        span: 2,
+        visual: "stack",
+      },
+      {
+        icon: "users",
+        title: "Designed with the people who use it",
+        text: "Work directly with portfolio managers and analysts to identify which parts of their research an agent can reliably take over, agree on what counts as working, then build and ship it.",
+      },
+      {
+        icon: "layers",
+        title: "300+ tools, no accuracy collapse",
+        text: "Scaled the agent to 300+ analytical functions across 50 modules without the selection-accuracy collapse that caps most agent systems, by having it load tool definitions on demand instead of carrying the full catalog in context.",
+        metric: "300+ functions",
+      },
+      {
+        icon: "flask",
+        title: "Quant logic as tested code",
+        text: "Built the quantitative function library the agent reasons over, implementing valuation, risk, and factor logic as tested code rather than prompt instructions, so every number in a report is reproducible and defensible to a client.",
+      },
+      {
+        icon: "checks",
+        title: "Evals before every change",
+        text: "Keep a fixed set of validated queries the system is re-run against before every prompt or model change, so accuracy regressions surface before customers see them.",
+      },
+      {
+        icon: "workflow",
+        title: "From plain-English thesis to backtested report",
+        text: "Architected the orchestration layer: the system takes an investment thesis written in plain English, plans the analyses needed, runs them in dependency order against live market data, and returns a backtested report. Running independent branches in parallel cut runtime 27%.",
+        metric: "−27% runtime",
+        span: 2,
+        visual: "pipeline",
+      },
+      {
+        icon: "shield",
+        title: "Auditable by design",
+        text: "Made agent output auditable for a compliance-sensitive audience. Every figure in a report traces to the query that produced it and re-verifies against live data in one click, with per-request tracing across the full agent trajectory.",
+        metric: "1-click re-verify",
+      },
+      {
+        icon: "network",
+        title: "Context passed by reference",
+        text: "Passed large intermediate results between stages by reference rather than through the prompt, keeping context small across long chains where naive prompt-chaining silently drops data, with caching and per-call cost attribution over the same path.",
+        span: 3,
+        visual: "reference",
+      },
     ],
   },
   {
-    position: "Software Engineer",
     company: "Goldman Sachs",
-    duration: "September 2022 - April 2026",
-    description:
-      "Developing high-performance financial software solutions and analytics tools that process large-scale data sets.",
-    responsibilities: [
-      "Designed and implemented core components of the v2 reporting engine (25+ tables) to drive the rendering of 200k+ daily reports.",
-      "Identified a critical workflow bottleneck and engineered a parsing engine using Apache PDFBox, reducing processing time by 98% (10m to <10s).",
-      "Engineered a self-service migration platform with a React UI, reducing operation time by 90% and enabling safe, one-click deployments.",
-      "Developed reusable internal Java libraries adopted by 3+ teams, reducing boilerplate code by standardizing error handling.",
-      "Led a legacy codebase modernization effort, removing 400+ unused files and increasing test coverage from 3% to 60%."
-    ],
-  },
-  {
-    position: "Software Engineering Intern",
-    company: "Appreciate",
-    duration: "March 2022 - June 2022",
-    description:
-      "Optimized backend endpoints and built image filtering services.",
-    responsibilities: [
-      "Optimized Python (Flask) endpoints by implementing a tiered Redis caching strategy, reducing P99 latency by 70%.",
-      "Built a high-performance image filtering services on Google Cloud Platform (GCP), achieving >80% accuracy in automated content moderation."
+    monogram: "GS",
+    role: "Software Engineer, Associate",
+    period: "Sep 2022 — Apr 2026",
+    summary: "Client reporting and document automation",
+    highlights: [
+      {
+        icon: "gauge",
+        title: "v2 client reporting engine",
+        text: "Designed and shipped the v2 client reporting engine (25+ tables) rendering 200k+ reports daily for institutional clients, working with stakeholders to add dynamic grouping and sorting for accounts at 20k+ pages/day.",
+        metric: "200k+",
+        metricLabel: "reports a day",
+      },
+      {
+        icon: "fileSearch",
+        title: "Document parsing",
+        text: "Engineered an Apache PDFBox parser extracting structured data from unstructured financial documents, cutting handling time 98% (10m to under 10s) and eliminating manual entry.",
+        metric: "98%",
+        metricLabel: "less handling time",
+      },
+      {
+        icon: "testTube",
+        title: "Legacy modernization",
+        text: "Led a legacy modernization initiative: removed 400+ dead files and raised test coverage from 3% to 60%, unlocking daily deployments. Mentored new hires and interns through onboarding and production debugging.",
+        metric: "3% → 60%",
+        metricLabel: "test coverage",
+      },
     ],
   },
 ];
 
 export const projects = [
   {
-    title: "Real-Time Market Signal Engine",
-    description:
-      "A sub-second signal generation engine that processes live financial streams for autonomous trading.",
+    title: "Agentic Trade Execution MCP",
+    tagline:
+      "An MCP server that lets any LLM client place real orders in plain English, with guardrails on anything destructive.",
+    stack: ["Python", "MCP", "React"],
+    surfaces: ["Web UI", "WhatsApp"],
     highlights: [
-      "Built an asynchronous Python engine to ingest live data and continuously evaluate complex user conditions like price thresholds and ratio triggers.",
-      "Optimized evaluation using O(1) in-memory lookups to process hundreds of concurrent rules with sub-millisecond latency.",
-      "Designed an extensible architecture where the alert layer can be seamlessly swapped for direct automated order execution."
+      "Built a custom MCP server exposing an exchange-agnostic trading API to LLM clients for natural-language order execution, surfaced through both a web UI and WhatsApp.",
+      "Designed the tool layer to cover the full order spectrum (perpetuals, limit and stop-loss, leverage) across equities, crypto, and commodities, with schema-level guardrails on destructive actions.",
     ],
-    technologies: ["Python", "Asyncio", "WebSockets"],
-  },
-  {
-    title: "Dynamic Dashboard Engine",
-    description:
-      "A modular, responsive dashboard building platform for complex multi-metric data visualization.",
-    highlights: [
-      "Implemented a flexible React-based widget system with drag and drop grid layouts and Zustand for seamless state synchronization.",
-      "Utilized Recharts and lightweight-charts for performant rendering of complex multi-metric time series data across dual Y-axes.",
-      "Integrated an AI assistant to enable natural language generation of fully formed, interactive dashboards."
-    ],
-    technologies: ["React", "Zustand", "TypeScript", "Tailwind CSS"],
-  },
-  {
-    title: "Personal Anonymous Blog",
-    description:
-      "A detailed personal blog with a focus on technical topics and industry insights.",
-    highlights: [
-      "Personal journal with book reviews, travel logs, and monthly finance updates",
-      "Minimalist and responsive design with dark/light mode that is ready for expansion",
-      "Personal experiment to improve writing skills and document life journey",
-    ],
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Sanity.io"],
   },
 ];
 
-// Updated skills with isBold property for highlighting key skills
-export interface Skill {
-  name: string;
-  isBold: boolean;
-}
+export const education = [
+  {
+    school: "University of California, Los Angeles",
+    degrees: ["B.S. Computer Science", "B.A. Economics"],
+    period: "Sep 2018 — Jun 2022",
+    location: "Los Angeles, CA",
+  },
+];
 
-export const skillCategories = [
-  { key: "languages", title: "Programming Languages" },
-  { key: "frontend", title: "Frontend Technologies" },
-  { key: "backend", title: "Backend Technologies" },
-  { key: "databases", title: "Databases" },
-  { key: "deployment", title: "Deployment & DevOps" },
-  { key: "other", title: "Other Skills" },
-] as const;
-
-export const skills = {
-  languages: [
-    { name: "TypeScript", isBold: true },
-    { name: "Python", isBold: true },
-    { name: "JavaScript", isBold: true },
-    { name: "SQL", isBold: true },
-    { name: "Java", isBold: false },
-    { name: "C++", isBold: false },
-  ],
-  frontend: [
-    { name: "React", isBold: true },
-    { name: "Zustand", isBold: true },
-    { name: "Tailwind CSS", isBold: true },
-    { name: "Framer Motion", isBold: true },
-    { name: "Angular", isBold: false },
-    { name: "HTML/CSS", isBold: false },
-  ],
-  backend: [
-    { name: "FastAPI", isBold: true },
-    { name: "Asyncio", isBold: true },
-    { name: "Spring Boot", isBold: true },
-    { name: "Node.js", isBold: false },
-    { name: "Express", isBold: false },
-  ],
-  databases: [
-    { name: "PostgreSQL", isBold: true },
-    { name: "TimescaleDB", isBold: true },
-    { name: "Redis", isBold: true },
-    { name: "InfluxDB", isBold: false },
-    { name: "MySQL", isBold: false },
-  ],
-  deployment: [
-    { name: "Docker", isBold: true },
-    { name: "Vercel", isBold: true },
-    { name: "Cloudflare", isBold: true },
-    { name: "AWS", isBold: false },
-    { name: "Git", isBold: true },
-    { name: "Railway", isBold: false },
-  ],
-  other: [
-    { name: "AI Agent Frameworks", isBold: true },
-    { name: "Data Engineering", isBold: true },
-    { name: "Financial Modeling", isBold: true },
-    { name: "WebSockets", isBold: true },
-  ],
-};
+export const skills = [
+  {
+    group: "Applied AI",
+    icon: "bot",
+    items: [
+      "Anthropic",
+      "OpenAI",
+      "Gemini",
+      "Agentic Workflows",
+      "Plan-and-Execute",
+      "ReAct",
+      "Tool Use & Function Calling",
+      "Custom Agent Orchestration",
+      "Dynamic Tool Discovery",
+      "RAG (Qdrant)",
+      "Model Context Protocol (MCP)",
+    ],
+  },
+  {
+    group: "Languages",
+    icon: "braces",
+    items: ["Python", "TypeScript", "SQL", "Java", "C++", "JavaScript"],
+  },
+  {
+    group: "Full Stack",
+    icon: "server",
+    items: [
+      "FastAPI",
+      "Spring Boot",
+      "Postgres",
+      "TimescaleDB",
+      "Redis",
+      "Dagster",
+      "Celery",
+      "Pandas/NumPy",
+      "Docker",
+      "React",
+      "Angular",
+      "Tailwind",
+    ],
+  },
+  {
+    group: "Observability & Enterprise",
+    icon: "radar",
+    items: [
+      "Sentry",
+      "PostHog",
+      "Grafana",
+      "Distributed Tracing",
+      "Audit Logging",
+      "RBAC",
+    ],
+  },
+];
 
 export const interests = [
-  {
-    name: "Yoga",
-    description:
-      "Practicing mindfulness and flexibility through regular yoga sessions.",
-    icon: "yoga",
-  },
-  {
-    name: "Swimming",
-    description: "Enjoy swimming laps for exercise and relaxation.",
-    icon: "swimming",
-  },
-  {
-    name: "Tennis",
-    description: "Competitive tennis player at the amateur level.",
-    icon: "tennis",
-  },
-  {
-    name: "Pickleball",
-    description: "Recently discovered and enjoying this fast-growing sport.",
-    icon: "pickleball",
-  },
-  {
-    name: "Hiking",
-    description: "Exploring nature trails and enjoying the outdoors.",
-    icon: "hiking",
-  },
-  {
-    name: "Reading",
-    description: "Avid reader of non-fiction books on technology and business.",
-    icon: "reading",
-  },
-  {
-    name: "Crypto",
-    description:
-      "Exploring blockchain technology and cryptocurrency investments.",
-    icon: "crypto",
-  },
-  {
-    name: "Personal Finance",
-    description:
-      "Optimizing finances and working toward FIRE while still enjoying life.",
-    icon: "finance",
-  },
-  {
-    name: "Formula 1",
-    description: "Passionate follower of F1 racing, strategy, and engineering.",
-    icon: "f1",
-  },
-  {
-    name: "Snowboarding",
-    description: "Chasing powder and enjoying the mountains in winter.",
-    icon: "snowboarding",
-  },
-  {
-    name: "Cocktail Making",
-    description: "Experimenting with mixology and creating craft cocktails.",
-    icon: "cocktails",
-  },
+  { name: "Yoga", icon: "yoga" },
+  { name: "Swimming", icon: "swimming" },
+  { name: "Tennis", icon: "tennis" },
+  { name: "Pickleball", icon: "pickleball" },
+  { name: "Hiking", icon: "hiking" },
+  { name: "Reading", icon: "reading" },
+  { name: "Crypto", icon: "crypto" },
+  { name: "Personal Finance", icon: "finance" },
+  { name: "Formula 1", icon: "f1" },
+  { name: "Snowboarding", icon: "snowboarding" },
+  { name: "Cocktail Making", icon: "cocktails" },
 ];

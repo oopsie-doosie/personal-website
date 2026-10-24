@@ -4,15 +4,12 @@
 import { StrictMode } from "react";
 import { renderToString } from "react-dom/server";
 import App from "./App.tsx";
-import { ThemeProvider } from "./context/ThemeContext";
 
 export { structuredData, llmsTxt } from "./seo";
 
 export const render = () =>
   renderToString(
     <StrictMode>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <App />
     </StrictMode>
   );

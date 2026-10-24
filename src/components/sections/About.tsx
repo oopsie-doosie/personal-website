@@ -1,107 +1,74 @@
 // src/components/sections/About.tsx
-import { motion } from "framer-motion";
-import { personalInfo, education } from "@/data"; // Updated import path
+import { GraduationCap } from "lucide-react";
+import { education, interests } from "@/data";
+import { Icon } from "@/utils/icons";
+import SectionHeading from "@/components/ui/SectionHeading";
 
-const About = () => {
-  return (
-    <section
-      id="about"
-      className="py-20 bg-gradient-to-b from-primary-background via-secondary-background to-primary-background"
-    >
-      <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold mb-12 text-center"
-        >
-          About Me
-        </motion.h2>
+const About = () => (
+  <section id="about" className="section">
+    <div className="shell">
+      <SectionHeading index="04" eyebrow="About" title="Systems and" accent="markets." />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Professional Summary */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="bg-card rounded-xl p-8 shadow-lg"
-          >
-            <h3 className="text-2xl font-semibold mb-4 text-primary-accent">
-              Professional Profile
-            </h3>
-            <p className="text-lg text-text-secondary leading-relaxed">
-              {personalInfo.bio}
-            </p>
-
-            <div className="mt-6 text-text-tertiary">
-              <p>
-                <span className="font-semibold text-text-primary">Email: </span>
-                {personalInfo.email}
-              </p>
-              <p className="mt-2">
-                <span className="font-semibold text-text-primary">
-                  GitHub:{" "}
-                </span>
-
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary-accent hover:text-secondary-accent transition-colors"
-                >
-                  {personalInfo.github.replace("https://github.com/", "")}
-                </a>
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Education */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="bg-card rounded-xl p-8 shadow-lg"
-          >
-            <h3 className="text-2xl font-semibold mb-4 text-primary-accent">
-              Education
-            </h3>
-
-            {education.map((item, index) => (
-              <div key={index} className="mb-6 last:mb-0">
-                <h4 className="text-xl font-medium text-text-primary">
-                  {item.degree}
-                </h4>
-                <p className="text-lg text-primary-accent mt-1">
-                  {item.institution}
-                </p>
-                <p className="text-text-tertiary mt-1">{item.duration}</p>
-                <p className="text-text-secondary mt-3">{item.description}</p>
-              </div>
-            ))}
-          </motion.div>
+      <div className="mt-16 grid gap-4 lg:grid-cols-12">
+        <div className="reveal space-y-6 text-xl leading-relaxed text-muted lg:col-span-7 lg:pr-10 sm:text-2xl sm:leading-relaxed">
+          <p>
+            I studied <span className="text-fg">computer science and economics</span> at
+            UCLA, and I've worked where the two meet ever since: three and a half years
+            building client reporting at <span className="text-fg">Goldman Sachs</span>, and
+            now <span className="text-fg">Arbwick</span>, where agents do real research work
+            for institutional investors.
+          </p>
+          <p>
+            The part I care about most is the unglamorous one: evaluations, audit trails and
+            tested code underneath the model, so the answer holds up when a client asks
+            where a number came from.
+          </p>
         </div>
 
-        {/* Personal Statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-gradient-primary/20 rounded-xl p-8 border border-primary-accent/30"
-        >
-          <p className="text-xl italic text-center text-text-secondary leading-relaxed">
-            "I believe in combining technical expertise with creative
-            problem-solving to build solutions that make a meaningful impact. My
-            background in both Computer Science and Economics gives me a unique
-            perspective on developing technology that delivers value."
-          </p>
-        </motion.div>
+        <div className="grid gap-4 lg:col-span-5">
+          {education.map((item) => (
+            <article key={item.school} className="spotlight card reveal p-6 sm:p-7">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-cyan">
+                  <GraduationCap className="h-[18px] w-[18px]" aria-hidden="true" />
+                </span>
+                <p className="eyebrow">Education</p>
+              </div>
+              <h3 className="mt-6 text-xl font-medium tracking-tight">{item.school}</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {item.degrees.map((degree) => (
+                  <li key={degree} className="chip text-fg">
+                    {degree}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 font-mono text-xs uppercase tracking-[0.18em] text-faint">
+                {item.period} · {item.location}
+              </p>
+            </article>
+          ))}
+
+          <article className="spotlight card reveal p-6 sm:p-7">
+            <p className="eyebrow">Off the clock</p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {interests.map((interest) => (
+                <li
+                  key={interest.name}
+                  className="chip group cursor-default transition hover:-translate-y-0.5 hover:border-white/25 hover:text-fg"
+                >
+                  <Icon
+                    name={interest.icon}
+                    className="h-3.5 w-3.5 text-faint transition-colors group-hover:text-mint"
+                  />
+                  {interest.name}
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default About;
