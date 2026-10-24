@@ -1,6 +1,7 @@
 // scripts/prerender.js
 // Runs after `vite build` and `vite build --ssr`: renders the app into
-// dist/index.html, injects JSON-LD structured data, and writes dist/llms.txt.
+// dist/index.html, preloads the above-the-fold fonts, injects JSON-LD
+// structured data, and writes dist/llms.txt.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
@@ -20,6 +21,21 @@ const replaceOnce = (html, search, replacement) => {
   return html.replace(search, () => replacement);
 };
 
+// Fonts used in the hero, so they download alongside the first paint
+const fontPatterns = [
+  /^geist-latin-wght-normal-.*\.woff2$/,
+  /^geist-mono-latin-wght-normal-.*\.woff2$/,
+  /^instrument-serif-latin-400-italic-.*\.woff2$/,
+];
+const assets = fs.readdirSync(path.join(root, "dist/assets"));
+const fontPreloads = fontPatterns
+  .map((pattern) => {
+    const file = assets.find((name) => pattern.test(name));
+    if (!file) throw new Error(`prerender: no font file matching ${pattern}`);
+    return `<link rel="preload" href="/assets/${file}" as="font" type="font/woff2" crossorigin />`;
+  })
+  .join("\n    ");
+
 // Escape "<" so the JSON can never close the surrounding <script> tag
 const jsonLd = JSON.stringify(structuredData).replace(/</g, "\\u003c");
 
@@ -28,7 +44,7 @@ html = replaceOnce(html, '<div id="root"></div>', `<div id="root">${render()}</d
 html = replaceOnce(
   html,
   "</head>",
-  `  <script type="application/ld+json">${jsonLd}</script>\n  </head>`
+  `  ${fontPreloads}\n    <script type="application/ld+json">${jsonLd}</script>\n  </head>`
 );
 
 fs.writeFileSync(indexPath, html);

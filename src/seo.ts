@@ -7,16 +7,10 @@ import {
   experience,
   projects,
   skills,
-  skillCategories,
 } from "@/data";
 
 const siteUrl = `${personalInfo.website}/`;
-const currentRole = experience[0];
-const institutions = [...new Set(education.map((item) => item.institution))];
-const keySkills = Object.values(skills)
-  .flat()
-  .filter((skill) => skill.isBold)
-  .map((skill) => skill.name);
+const [city, region] = personalInfo.location.split(", ");
 
 // JSON-LD (schema.org) describing the site and the person behind it
 export const structuredData = {
@@ -45,14 +39,20 @@ export const structuredData = {
       alternateName: personalInfo.shortName,
       url: siteUrl,
       email: `mailto:${personalInfo.email}`,
-      description: personalInfo.bio,
-      jobTitle: currentRole.position,
-      worksFor: { "@type": "Organization", name: currentRole.company },
-      alumniOf: institutions.map((name) => ({
+      description: personalInfo.summary,
+      jobTitle: personalInfo.role,
+      worksFor: { "@type": "Organization", name: personalInfo.company },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: city,
+        addressRegion: region,
+        addressCountry: "US",
+      },
+      alumniOf: education.map((item) => ({
         "@type": "CollegeOrUniversity",
-        name,
+        name: item.school,
       })),
-      knowsAbout: keySkills,
+      knowsAbout: skills.flatMap((group) => group.items),
       sameAs: [personalInfo.github, personalInfo.linkedin],
     },
   ],
@@ -61,8 +61,8 @@ export const structuredData = {
 // llms.txt (https://llmstxt.org) gives AI assistants a plain-text summary
 export const llmsTxt = [
   `# ${personalInfo.name}`,
-  `> ${personalInfo.bio}`,
-  `${personalInfo.name} (${personalInfo.shortName}) is currently ${currentRole.position} at ${currentRole.company}. ${personalInfo.title}.`,
+  `> ${personalInfo.summary}`,
+  `${personalInfo.name} (${personalInfo.shortName}) is ${personalInfo.role} of ${personalInfo.company}, based in ${personalInfo.location}.`,
   [
     "## Links",
     `- [Website](${siteUrl}): Portfolio with experience, projects, and skills`,
@@ -72,31 +72,32 @@ export const llmsTxt = [
   ].join("\n"),
   [
     "## Experience",
-    ...experience.map(
-      (job) =>
-        `- **${job.position}, ${job.company}** (${job.duration}): ${job.description}`
+    ...experience.map((job) =>
+      [
+        `### ${job.role}, ${job.company} (${job.period})`,
+        job.summary,
+        ...job.highlights.map((item) => `- ${item.text}`),
+      ].join("\n")
     ),
-  ].join("\n"),
+  ].join("\n\n"),
+  [
+    "## Projects",
+    ...projects.map((project) =>
+      [
+        `### ${project.title} (${project.stack.join(", ")})`,
+        ...project.highlights.map((item) => `- ${item}`),
+      ].join("\n")
+    ),
+  ].join("\n\n"),
   [
     "## Education",
     ...education.map(
-      (item) => `- ${item.degree}, ${item.institution} (${item.duration})`
-    ),
-  ].join("\n"),
-  [
-    "## Projects",
-    ...projects.map(
-      (project) =>
-        `- **${project.title}**: ${project.description} (${project.technologies.join(", ")})`
+      (item) =>
+        `- ${item.degrees.join(", ")}, ${item.school} (${item.period})`
     ),
   ].join("\n"),
   [
     "## Skills",
-    ...skillCategories.map(
-      (category) =>
-        `- ${category.title}: ${skills[category.key]
-          .map((skill) => skill.name)
-          .join(", ")}`
-    ),
+    ...skills.map((group) => `- ${group.group}: ${group.items.join(", ")}`),
   ].join("\n"),
 ].join("\n\n") + "\n";

@@ -1,41 +1,48 @@
 // src/App.tsx
-import { useEffect } from "react";
-
 import {
   Navbar,
   Hero,
-  Footer,
-  About,
   Experience,
   Projects,
-  Skills,
-  Interests,
+  Toolkit,
+  About,
   Contact,
+  Footer,
 } from "@/components/index";
-
-
+import { useSpotlight } from "@/hooks/useSpotlight";
 
 function App() {
-  // Add smooth scrolling effect
-  useEffect(() => {
-    // You can add any global effects here
-  }, []);
+  useSpotlight();
 
   return (
-    <div className="min-h-screen bg-primary-background text-text-primary relative">
+    <>
+      <a
+        href="#main"
+        className="sr-only z-[90] rounded-full bg-fg px-4 py-2 text-ink focus:not-sr-only focus:fixed focus:left-4 focus:top-4"
+      >
+        Skip to content
+      </a>
+
+      {/* Ambient backdrop: drifting aurora, film grain, scroll progress */}
+      <div className="aurora" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className="grain" aria-hidden="true" />
+      <div className="scroll-progress" aria-hidden="true" />
 
       <Navbar />
-      <main>
+      <main id="main">
         <Hero />
-        <About />
         <Experience />
         <Projects />
-        <Skills />
-        <Interests />
+        <Toolkit />
+        <About />
         <Contact />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 

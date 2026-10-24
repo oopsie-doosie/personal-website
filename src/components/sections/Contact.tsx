@@ -1,8 +1,7 @@
 // src/components/sections/Contact.tsx
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { ArrowUpRight, Check, Copy, Github, Linkedin, Send } from "lucide-react";
 import { personalInfo } from "@/data";
-import { SocialIcon } from "@/utils/socialIcons";
 
 if (!import.meta.env.VITE_WEB3FORMS_KEY) {
   console.error(
@@ -10,28 +9,23 @@ if (!import.meta.env.VITE_WEB3FORMS_KEY) {
   );
 }
 
+const inputClass =
+  "w-full rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3.5 text-fg placeholder:text-faint transition focus:border-cyan/60 focus:bg-white/[0.05] focus:outline-none focus:ring-4 focus:ring-cyan/10";
+
 const Contact = () => {
   const [status, setStatus] = useState({
-    submitted: false,
     submitting: false,
     info: { error: false, msg: null as string | null },
   });
+  const [copied, setCopied] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus({
-      submitted: false,
-      submitting: true,
-      info: { error: false, msg: null },
-    });
+    const form = e.currentTarget;
+    setStatus({ submitting: true, info: { error: false, msg: null } });
 
-    // Create FormData from the form
-    const formData = new FormData(e.target as HTMLFormElement);
-
-    // Append the access key from environment variable
+    const formData = new FormData(form);
     formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
-
-    // Add additional fields
     formData.append("subject", "New message from your personal website");
 
     try {
@@ -39,19 +33,16 @@ const Contact = () => {
         method: "POST",
         body: formData,
       });
-
       const data = await response.json();
 
       if (data.success) {
         setStatus({
-          submitted: true,
           submitting: false,
-          info: { error: false, msg: "Message sent successfully!" },
+          info: { error: false, msg: "Message sent. I'll get back to you soon." },
         });
-        (e.target as HTMLFormElement).reset();
+        form.reset();
       } else {
         setStatus({
-          submitted: false,
           submitting: false,
           info: {
             error: true,
@@ -62,193 +53,107 @@ const Contact = () => {
     } catch (error) {
       console.error("Form submission error:", error);
       setStatus({
-        submitted: false,
         submitting: false,
         info: { error: true, msg: "Network error. Please try again later." },
       });
     }
   };
 
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(personalInfo.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${personalInfo.email}`;
+    }
+  };
+
   return (
-    <section
-      id="contact"
-      className="py-20 bg-gradient-to-b from-primary-background via-secondary-background to-primary-background"
-    >
-      <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-          className="text-4xl font-bold mb-12 text-center"
-        >
-          Connect With Me
-        </motion.h2>
+    <section id="contact" className="section">
+      <div className="shell">
+        <div className="reveal mx-auto max-w-4xl text-center">
+          <p className="eyebrow">
+            <span className="text-gradient">05</span>
+            <span className="mx-2 text-white/20">/</span>
+            Contact
+          </p>
+          <h2 className="mt-6 text-[clamp(2.75rem,8vw,6rem)] font-semibold leading-[0.95] tracking-[-0.05em]">
+            Let's build something{" "}
+            <span className="serif-accent text-gradient">that ships.</span>
+          </h2>
+          <p className="mx-auto mt-7 max-w-xl text-lg leading-relaxed text-muted">
+            Working on agents, data platforms, or anything where AI meets finance? I'd love
+            to hear about it.
+          </p>
 
-        <div className="max-w-3xl mx-auto bg-card rounded-xl p-8 shadow-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Left column - Contact info */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <a href={`mailto:${personalInfo.email}`} className="btn-primary">
+              {personalInfo.email}
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <button
+              type="button"
+              onClick={copyEmail}
+              className="icon-btn"
+              aria-label={copied ? "Email copied" : "Copy email address"}
             >
-              <h3 className="text-2xl font-bold text-primary-accent mb-4">
-                Get In Touch
-              </h3>
-              <p className="text-text-secondary mb-6">
-                I'm always open to discussing new projects, opportunities or
-                partnerships.
-              </p>
-
-              <ul className="space-y-4">
-                <li className="text-text-secondary">
-                  <a
-                    href={`mailto:${personalInfo.email}`}
-                    className="flex items-center hover:text-primary-accent transition-colors"
-                  >
-                    <span className="mr-3 text-primary-accent">
-                      <SocialIcon name="email" />
-                    </span>
-                    {personalInfo.email}
-                  </a>
-                </li>
-                <li className="text-text-secondary">
-                  <a
-                    href={personalInfo.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center hover:text-primary-accent transition-colors"
-                  >
-                    <span className="mr-3 text-primary-accent">
-                      <SocialIcon name="github" />
-                    </span>
-                    GitHub
-                  </a>
-                </li>
-                <li className="text-text-secondary">
-                  <a
-                    href={personalInfo.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center hover:text-primary-accent transition-colors"
-                  >
-                    <span className="mr-3 text-primary-accent">
-                      <SocialIcon name="linkedin" />
-                    </span>
-                    LinkedIn
-                  </a>
-                </li>
-              </ul>
-            </motion.div>
-
-            {/* Right column - Contact form */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="bg-secondary-background/30 p-6 rounded-lg"
-            >
-              <h3 className="text-xl font-semibold text-primary-accent mb-4">
-                Quick Message
-              </h3>
-              <form onSubmit={handleSubmit}>
-                {/* We're not adding hidden input fields for access_key here because we're appending it in the handleSubmit function */}
-
-                {/* Honeypot field for spam prevention */}
-                <input
-                  type="checkbox"
-                  name="botcheck"
-                  className="hidden"
-                  style={{ display: "none" }}
-                />
-
-                <div className="mb-4">
-                  <label
-                    htmlFor="name"
-                    className="block text-text-secondary text-sm font-medium mb-1"
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Your Name"
-                    required
-                    className="w-full px-4 py-2 rounded bg-secondary-background border border-border text-text-primary focus:outline-none focus:border-primary-accent"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="email"
-                    className="block text-text-secondary text-sm font-medium mb-1"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Your Email"
-                    required
-                    className="w-full px-4 py-2 rounded bg-secondary-background border border-border text-text-primary focus:outline-none focus:border-primary-accent"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="message"
-                    className="block text-text-secondary text-sm font-medium mb-1"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    placeholder="Your Message"
-                    required
-                    rows={4}
-                    className="w-full px-4 py-2 rounded bg-secondary-background border border-border text-text-primary focus:outline-none focus:border-primary-accent"
-                  ></textarea>
-                </div>
-
-                {status.info.msg && (
-                  <div
-                    className={`mb-4 text-sm ${
-                      status.info.error ? "text-red-500" : "text-green-500"
-                    }`}
-                  >
-                    {status.info.msg}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={status.submitting}
-                  className={`
-                    btn bg-primary-accent hover:bg-secondary-accent text-text-primary 
-                    border-none px-6 py-2 rounded-md transition-colors
-                    ${status.submitting ? "opacity-70 cursor-not-allowed" : ""}
-                  `}
-                >
-                  {status.submitting ? "Sending..." : "Send Message"}
-                </button>
-              </form>
-            </motion.div>
+              {copied ? <Check className="h-[18px] w-[18px] text-mint" /> : <Copy className="h-[18px] w-[18px]" />}
+            </button>
+            <a href={personalInfo.linkedin} target="_blank" rel="noopener noreferrer" className="icon-btn" aria-label="LinkedIn">
+              <Linkedin className="h-[18px] w-[18px]" />
+            </a>
+            <a href={personalInfo.github} target="_blank" rel="noopener noreferrer" className="icon-btn" aria-label="GitHub">
+              <Github className="h-[18px] w-[18px]" />
+            </a>
           </div>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center text-text-tertiary mt-12"
+        <form
+          onSubmit={handleSubmit}
+          className="glass reveal mx-auto mt-16 max-w-2xl rounded-[28px] p-6 sm:p-8"
         >
-          Looking forward to connecting with you!
-        </motion.p>
+          {/* Honeypot field for spam prevention */}
+          <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} tabIndex={-1} />
+
+          <p className="eyebrow">Or send a quick message</p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <div>
+              <label htmlFor="name" className="sr-only">Name</label>
+              <input id="name" name="name" type="text" required placeholder="Your name" autoComplete="name" className={inputClass} />
+            </div>
+            <div>
+              <label htmlFor="email" className="sr-only">Email</label>
+              <input id="email" name="email" type="email" required placeholder="Your email" autoComplete="email" className={inputClass} />
+            </div>
+          </div>
+          <label htmlFor="message" className="sr-only">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows={5}
+            placeholder="What are you building?"
+            className={`${inputClass} mt-4 resize-none`}
+          />
+
+          <div className="mt-5 flex flex-col-reverse items-center justify-between gap-4 sm:flex-row">
+            <p
+              className={`min-h-[1.25rem] text-sm ${status.info.error ? "text-red-400" : "text-mint"}`}
+              aria-live="polite"
+            >
+              {status.info.msg}
+            </p>
+            <button
+              type="submit"
+              disabled={status.submitting}
+              className="btn-primary w-full disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto"
+            >
+              {status.submitting ? "Sending…" : "Send message"}
+              <Send className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </div>
+        </form>
       </div>
     </section>
   );
