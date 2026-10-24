@@ -115,6 +115,7 @@ const Hero = () => {
         >
           <Link
             to="about"
+            href="#about"
             spy={true}
             smooth={true}
             offset={-70}

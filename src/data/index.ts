@@ -7,6 +7,7 @@ export const personalInfo = {
   email: "ypolat99yupa@gmail.com",
   github: "https://github.com/oopsie-doosie/",
   linkedin: "https://www.linkedin.com/in/ypolat99/",
+  website: "https://www.ypolat.com",
   bio: "UCLA graduate with dual degrees in Computer Science and Economics, currently building ArbWick and developing innovative AI solutions.",
 };
 
@@ -109,6 +110,15 @@ export interface Skill {
   name: string;
   isBold: boolean;
 }
+
+export const skillCategories = [
+  { key: "languages", title: "Programming Languages" },
+  { key: "frontend", title: "Frontend Technologies" },
+  { key: "backend", title: "Backend Technologies" },
+  { key: "databases", title: "Databases" },
+  { key: "deployment", title: "Deployment & DevOps" },
+  { key: "other", title: "Other Skills" },
+] as const;
 
 export const skills = {
   languages: [

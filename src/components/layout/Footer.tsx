@@ -55,7 +55,11 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-text-tertiary text-sm mb-4 md:mb-0">
+          {/* Prerendered at build time, so the year may differ on hydration */}
+          <p
+            className="text-text-tertiary text-sm mb-4 md:mb-0"
+            suppressHydrationWarning
+          >
             © {currentYear} {personalInfo.name}. All rights reserved.
           </p>
           <p className="text-text-tertiary text-xs">

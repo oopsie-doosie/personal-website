@@ -71,6 +71,7 @@ const Navbar = () => {
       <div className="relative w-full max-w-6xl mx-auto px-3 sm:px-4 flex justify-between items-center">
         <Link
           to="home"
+          href="#home"
           spy={true}
           smooth={true}
           offset={-70}
@@ -88,6 +89,7 @@ const Navbar = () => {
               <Link
                 key={item.target}
                 to={item.target}
+                href={`#${item.target}`}
                 spy={true}
                 smooth={true}
                 offset={-70}
@@ -172,6 +174,7 @@ const Navbar = () => {
                   <Link
                     key={item.target}
                     to={item.target}
+                    href={`#${item.target}`}
                     spy={true}
                     smooth={true}
                     offset={-70}
