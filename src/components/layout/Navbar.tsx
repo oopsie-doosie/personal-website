@@ -144,7 +144,7 @@ const Navbar = () => {
                 onPointerEnter={preloadRetro}
                 onFocus={preloadRetro}
                 aria-label="Switch to the retro game edition"
-                title="Retro game edition"
+                title="Press start"
               >
                 <Gamepad2
                   className="h-[18px] w-[18px] transition-transform duration-300 group-hover:-rotate-12"
@@ -152,7 +152,8 @@ const Navbar = () => {
                 />
                 <span className="retro-toggle-ping" aria-hidden="true" />
               </button>
-              {/* The button above is the accessible control; this is a visual hint */}
+              {/* The button above is the accessible control; this is a visual
+                  hint that teases without spoiling the surprise */}
               <div
                 aria-hidden="true"
                 onClick={() => switchTheme("retro")}
@@ -161,8 +162,8 @@ const Navbar = () => {
                   showRetroHint && !isScrolled && !isMenuOpen ? "is-visible" : ""
                 }`}
               >
-                <span className="retro-hint-eyebrow">New · Retro mode</span>
-                <span>Play this site as a 90s video game</span>
+                <span className="retro-hint-eyebrow">Psst · Secret mode</span>
+                <span>Go on, press it. Trust me.</span>
               </div>
             </div>
             <a href="#contact" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
