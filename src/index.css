@@ -301,6 +301,149 @@
   animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* Navbar retro toggle. Until a visitor has tried the retro edition (the boot
+   script in index.html marks returning ones `retro-seen`), it hops, glows and
+   cycles colors inside a spinning rainbow ring */
+.retro-toggle {
+  position: relative;
+  isolation: isolate;
+}
+
+html:not(.retro-seen) .retro-toggle {
+  border-color: transparent;
+  animation:
+    retro-hop 3s var(--ease-out) infinite,
+    retro-glow 3s linear infinite;
+}
+
+html:not(.retro-seen) .retro-toggle::before,
+html:not(.retro-seen) .retro-toggle::after {
+  content: "";
+  position: absolute;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+html:not(.retro-seen) .retro-toggle::before {
+  inset: -3px;
+  background: conic-gradient(#ff5fae, #f6c177, #8cf3c6, #6ee7f9, #a594ff, #ff5fae);
+  animation: spin 2.4s linear infinite;
+}
+
+html:not(.retro-seen) .retro-toggle::after {
+  inset: 0;
+  background: rgb(var(--ink-2));
+}
+
+html:not(.retro-seen) .retro-toggle svg {
+  animation: retro-colors 3s linear infinite;
+}
+
+html:not(.retro-seen) .retro-toggle:hover {
+  animation: retro-glow 1s linear infinite;
+  transform: scale(1.1);
+}
+
+html:not(.retro-seen) .retro-toggle:hover::before {
+  animation-duration: 0.8s;
+}
+
+html:not(.retro-seen) .retro-toggle:hover svg {
+  animation:
+    retro-wiggle 0.5s ease-in-out infinite,
+    retro-colors 1s linear infinite;
+}
+
+.retro-toggle-ping {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 9999px;
+  background: #ff5fae;
+  border: 2px solid rgb(var(--ink));
+}
+
+.retro-toggle-ping::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: #ff5fae;
+  animation: ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+html.retro-seen .retro-toggle-ping {
+  display: none;
+}
+
+/* Speech bubble under the toggle for first-time visitors */
+.retro-hint {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: max-content;
+  max-width: min(250px, calc(100vw - 48px));
+  padding: 10px 14px;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  border-radius: 16px;
+  background: rgb(var(--ink-2) / 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 50px -12px rgb(var(--violet) / 0.55);
+  color: rgb(var(--fg));
+  font-size: 13px;
+  line-height: 1.35;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px) scale(0.96);
+  transform-origin: top right;
+  transition:
+    opacity 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+}
+
+/* Arrow pointing up at the button's centre */
+.retro-hint::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: 22px;
+  width: 11px;
+  height: 11px;
+  border-left: 1px solid rgb(255 255 255 / 0.14);
+  border-top: 1px solid rgb(255 255 255 / 0.14);
+  background: rgb(var(--ink-2));
+  transform: rotate(45deg);
+}
+
+.retro-hint.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: none;
+  animation: retro-float 2.4s ease-in-out 0.4s infinite;
+}
+
+.retro-hint-eyebrow {
+  font-family: theme("fontFamily.mono");
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #ff5fae, #f6c177, #8cf3c6, #6ee7f9);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+html.retro-seen .retro-hint {
+  display: none;
+}
+
 /* Hero terminal lines type in one after another on page load */
 .trace-line {
   opacity: 0;
@@ -450,6 +593,67 @@
   }
 }
 
+@keyframes retro-hop {
+  0%,
+  24%,
+  100% {
+    transform: translateY(0);
+  }
+  6% {
+    transform: translateY(-8px) rotate(-8deg);
+  }
+  12% {
+    transform: translateY(0);
+  }
+  17% {
+    transform: translateY(-4px) rotate(6deg);
+  }
+}
+
+@keyframes retro-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 22px -2px rgb(255 95 174 / 0.65);
+  }
+  33% {
+    box-shadow: 0 0 22px -2px rgb(var(--cyan) / 0.65);
+  }
+  66% {
+    box-shadow: 0 0 22px -2px rgb(var(--amber) / 0.65);
+  }
+}
+
+@keyframes retro-colors {
+  0%,
+  100% {
+    color: #ff5fae;
+  }
+  25% {
+    color: #f6c177;
+  }
+  50% {
+    color: #8cf3c6;
+  }
+  75% {
+    color: #6ee7f9;
+  }
+}
+
+@keyframes retro-wiggle {
+  25% {
+    transform: rotate(-14deg);
+  }
+  75% {
+    transform: rotate(14deg);
+  }
+}
+
+@keyframes retro-float {
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -489,7 +693,12 @@
   .trace-bar > span,
   .caret,
   .marquee-track,
-  .reveal {
+  .reveal,
+  .retro-toggle,
+  .retro-toggle::before,
+  .retro-toggle svg,
+  .retro-toggle-ping::after,
+  .retro-hint {
     animation: none !important;
   }
 

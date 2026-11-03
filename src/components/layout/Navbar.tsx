@@ -1,8 +1,9 @@
 // src/components/layout/Navbar.tsx
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Gamepad2, Menu, X } from "lucide-react";
 import { personalInfo } from "@/data";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import { useSiteTheme } from "@/theme/siteTheme";
 
 const navItems = [
   { id: "work", label: "Work" },
@@ -43,10 +44,21 @@ export const Monogram = ({ className = "" }: { className?: string }) => {
 
 const Navbar = () => {
   const active = useActiveSection(sectionIds);
+  const { switchTheme, preloadRetro } = useSiteTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
+  const [showRetroHint, setShowRetroHint] = useState(false);
   const linkRefs = useRef<Record<string, HTMLAnchorElement | null>>({});
+
+  // Nudge first-time visitors towards the retro edition (shown while they're
+  // at the top of the page). Anyone who has switched before is marked
+  // `retro-seen` by the boot script in index.html.
+  useEffect(() => {
+    if (document.documentElement.classList.contains("retro-seen")) return;
+    const show = window.setTimeout(() => setShowRetroHint(true), 1200);
+    return () => window.clearTimeout(show);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 24);
@@ -122,6 +134,37 @@ const Navbar = () => {
           </ul>
 
           <div className="flex items-center gap-1.5">
+            {/* Swaps the whole site for the retro game edition (src/retro).
+                Until a visitor has tried it, it bounces and glows (.retro-toggle). */}
+            <div className="relative">
+              <button
+                type="button"
+                className="icon-btn retro-toggle group h-10 w-10 md:h-9 md:w-9"
+                onClick={() => switchTheme("retro")}
+                onPointerEnter={preloadRetro}
+                onFocus={preloadRetro}
+                aria-label="Switch to the retro game edition"
+                title="Retro game edition"
+              >
+                <Gamepad2
+                  className="h-[18px] w-[18px] transition-transform duration-300 group-hover:-rotate-12"
+                  aria-hidden="true"
+                />
+                <span className="retro-toggle-ping" aria-hidden="true" />
+              </button>
+              {/* The button above is the accessible control; this is a visual hint */}
+              <div
+                aria-hidden="true"
+                onClick={() => switchTheme("retro")}
+                onPointerEnter={preloadRetro}
+                className={`retro-hint ${
+                  showRetroHint && !isScrolled && !isMenuOpen ? "is-visible" : ""
+                }`}
+              >
+                <span className="retro-hint-eyebrow">New · Retro mode</span>
+                <span>Play this site as a 90s video game</span>
+              </div>
+            </div>
             <a href="#contact" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
               Let's talk
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

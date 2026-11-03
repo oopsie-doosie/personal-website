@@ -36,6 +36,21 @@
       content="Co-founder &amp; CTO of Arbwick, building production AI agents for institutional investors. Previously 3.5 years as a software engineer at Goldman Sachs."
     />
     <meta name="twitter:image" content="https://www.ypolat.com/og-image.png" />
+
+    <!-- Visitors who picked the retro edition get a black screen instead of a
+         flash of the prerendered modern page while it loads, and anyone who has
+         switched before gets a calm navbar toggle (src/theme/siteTheme.ts) -->
+    <style>html.rx-boot,html.rx-boot body{background:#000}html.rx-boot #root{visibility:hidden}</style>
+    <script>
+      try {
+        var savedTheme = localStorage.getItem("site-theme");
+        if (savedTheme) document.documentElement.classList.add("retro-seen");
+        if ((new URLSearchParams(location.search).get("theme") || savedTheme) === "retro") {
+          document.documentElement.classList.add("rx-boot");
+          setTimeout(function () { document.documentElement.classList.remove("rx-boot"); }, 6000);
+        }
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
