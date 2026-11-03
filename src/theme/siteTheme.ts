@@ -1,11 +1,14 @@
 // src/theme/siteTheme.ts
-// The site ships in two independent editions that share the content in
-// src/data: the default "modern" one and the "retro" game edition in
-// src/retro. SiteThemeProvider swaps between them; this file holds the shared
-// context and the saved-choice helpers.
+// The site ships in independent editions that share the content in src/data:
+// the default "modern" one, the "retro" game edition in src/retro and the
+// "paper" newspaper edition in src/paper. SiteThemeProvider swaps between
+// them; this file holds the shared context and the saved-choice helpers.
 import { createContext, useContext } from "react";
 
-export type SiteTheme = "modern" | "retro";
+export type SiteTheme = "modern" | "retro" | "paper";
+export type Edition = Exclude<SiteTheme, "modern">;
+
+const THEMES: readonly SiteTheme[] = ["modern", "retro", "paper"];
 
 // "leaving" plays the outgoing edition's exit animation, "entering" the
 // incoming one's intro
@@ -15,29 +18,30 @@ export interface SiteThemeValue {
   theme: SiteTheme;
   phase: ThemePhase;
   switchTheme: (next: SiteTheme) => void;
-  // Starts downloading the retro edition early, e.g. when the toggle is hovered
-  preloadRetro: () => void;
+  // Starts downloading an edition early, e.g. when its toggle is hovered
+  preloadEdition: (edition: Edition) => void;
 }
 
 export const SiteThemeContext = createContext<SiteThemeValue>({
   theme: "modern",
   phase: "idle",
   switchTheme: () => {},
-  preloadRetro: () => {},
+  preloadEdition: () => {},
 });
 
 export const useSiteTheme = () => useContext(SiteThemeContext);
 
 const STORAGE_KEY = "site-theme";
 
-// A ?theme=retro link wins over the saved choice. Keep in sync with the inline
-// boot script in index.html, which hides the prerendered modern page early.
+// A ?theme=retro (or =paper) link wins over the saved choice. Keep in sync
+// with the inline boot script in index.html, which hides the prerendered
+// modern page early.
 export const readInitialTheme = (): SiteTheme => {
   try {
     const choice =
       new URLSearchParams(window.location.search).get("theme") ??
       localStorage.getItem(STORAGE_KEY);
-    return choice === "retro" ? "retro" : "modern";
+    return THEMES.find((theme) => theme === choice) ?? "modern";
   } catch {
     return "modern";
   }

@@ -37,17 +37,19 @@
     />
     <meta name="twitter:image" content="https://www.ypolat.com/og-image.png" />
 
-    <!-- Visitors who picked the retro edition get a black screen instead of a
-         flash of the prerendered modern page while it loads, and anyone who has
-         switched before gets a calm navbar toggle (src/theme/siteTheme.ts) -->
-    <style>html.rx-boot,html.rx-boot body{background:#000}html.rx-boot #root{visibility:hidden}</style>
+    <!-- Visitors who picked another edition (retro game or newspaper) get a
+         black screen instead of a flash of the prerendered modern page while it
+         loads, and anyone who has switched before gets a calm navbar toggle
+         (src/theme/siteTheme.ts) -->
+    <style>html.edition-boot,html.edition-boot body{background:#000}html.edition-boot #root{visibility:hidden}</style>
     <script>
       try {
         var savedTheme = localStorage.getItem("site-theme");
         if (savedTheme) document.documentElement.classList.add("retro-seen");
-        if ((new URLSearchParams(location.search).get("theme") || savedTheme) === "retro") {
-          document.documentElement.classList.add("rx-boot");
-          setTimeout(function () { document.documentElement.classList.remove("rx-boot"); }, 6000);
+        var edition = new URLSearchParams(location.search).get("theme") || savedTheme;
+        if (edition === "retro" || edition === "paper") {
+          document.documentElement.classList.add("edition-boot");
+          setTimeout(function () { document.documentElement.classList.remove("edition-boot"); }, 6000);
         }
       } catch (e) {}
     </script>
