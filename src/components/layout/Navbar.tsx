@@ -1,6 +1,6 @@
 // src/components/layout/Navbar.tsx
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
-import { ArrowUpRight, Gamepad2, Menu, X } from "lucide-react";
+import { ArrowUpRight, Gamepad2, Menu, Newspaper, X } from "lucide-react";
 import { personalInfo } from "@/data";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useSiteTheme } from "@/theme/siteTheme";
@@ -44,7 +44,9 @@ export const Monogram = ({ className = "" }: { className?: string }) => {
 
 const Navbar = () => {
   const active = useActiveSection(sectionIds);
-  const { switchTheme, preloadRetro } = useSiteTheme();
+  const { switchTheme, preloadEdition } = useSiteTheme();
+  const preloadRetro = () => preloadEdition("retro");
+  const preloadPaper = () => preloadEdition("paper");
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
@@ -166,6 +168,21 @@ const Navbar = () => {
                 <span>Go on, press it. Trust me.</span>
               </div>
             </div>
+            {/* Swaps the whole site for the newspaper edition (src/paper) */}
+            <button
+              type="button"
+              className="icon-btn group h-10 w-10 md:h-9 md:w-9"
+              onClick={() => switchTheme("paper")}
+              onPointerEnter={preloadPaper}
+              onFocus={preloadPaper}
+              aria-label="Switch to the newspaper edition"
+              title="Extra! Extra!"
+            >
+              <Newspaper
+                className="h-[18px] w-[18px] transition-transform duration-300 group-hover:-rotate-6"
+                aria-hidden="true"
+              />
+            </button>
             <a href="#contact" className="btn-primary hidden px-4 py-2 text-sm sm:inline-flex">
               Let's talk
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

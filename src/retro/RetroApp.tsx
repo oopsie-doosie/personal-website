@@ -43,7 +43,7 @@ const usePageChrome = () => {
     const previous = { title: document.title, color: themeColor?.content };
 
     html.classList.add("rx");
-    html.classList.remove("rx-boot");
+    html.classList.remove("edition-boot");
     html.style.setProperty("--rx-cursor", `url("${spriteDataUri(CURSOR)}") 0 0, auto`);
     html.style.setProperty("--rx-cursor-active", `url("${spriteDataUri(CURSOR_ACTIVE)}") 0 0, pointer`);
     document.title = `PRESS START | ${personalInfo.name}`;
